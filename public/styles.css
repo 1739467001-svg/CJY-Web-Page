@@ -685,6 +685,38 @@ mark {
 .pcard--feat .pcard__body h3 { font-size: 1.3rem; }
 @media (max-width: 660px) { .pcard--feat { grid-column: span 1; } .pcard--feat .pcard__thumb { aspect-ratio: 16 / 10; } }
 
+/* early / practice works — small, collapsed by default */
+.early { margin-top: 1.8rem; }
+.early__summary {
+  list-style: none; cursor: pointer; user-select: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  padding: .7rem 1rem; background: var(--paper-2);
+  border: var(--bd-2); border-radius: 12px; box-shadow: var(--sh-sm);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+.early__summary::-webkit-details-marker { display: none; }
+.early__summary:hover { transform: translate(-2px,-2px); box-shadow: var(--sh); }
+.early__label { font-family: var(--mono); font-weight: 700; font-size: .96rem; }
+.early__label span { color: var(--muted); font-size: .78rem; }
+.early__hint { font-family: var(--mono); font-size: .74rem; color: var(--muted); display: inline-flex; align-items: center; gap: .4rem; }
+.early__chev { display: inline-block; transition: transform .2s var(--ease); color: var(--red); font-style: normal; }
+.early[open] .early__chev { transform: rotate(90deg); }
+.early__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: .7rem; margin-top: .9rem; }
+.ecard {
+  display: flex; align-items: center; gap: .7rem; padding: .6rem .8rem;
+  background: var(--paper-2); border: var(--bd-2); border-radius: 10px; box-shadow: var(--sh-sm);
+  color: var(--ink); transition: transform .16s var(--ease), box-shadow .16s var(--ease), background .16s;
+}
+.ecard:hover { transform: translate(-3px,-3px); box-shadow: var(--sh); background: var(--lime); }
+.ecard__emoji { font-size: 1.4rem; flex-shrink: 0; }
+.ecard__meta { display: flex; flex-direction: column; gap: .12rem; min-width: 0; flex: 1; }
+.ecard__title { font-size: .9rem; font-weight: 700; line-height: 1.3; }
+.ecard__note { font-family: var(--mono); font-size: .66rem; font-weight: 400; color: var(--paper); background: var(--ink); padding: .05rem .35rem; border-radius: 5px; margin-left: .3rem; white-space: nowrap; }
+.ecard:hover .ecard__note { background: var(--red); }
+.ecard__url { font-family: var(--mono); font-size: .68rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ecard__arrow { margin-left: auto; flex-shrink: 0; font-weight: 700; opacity: .6; transition: transform .18s var(--ease), opacity .18s; }
+.ecard:hover .ecard__arrow { opacity: 1; transform: translate(2px,-2px); }
+
 /* =====================================================================
    Timeline (Journey)
    ===================================================================== */

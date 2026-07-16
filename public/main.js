@@ -81,9 +81,6 @@
   // shot: drop a screenshot path (e.g. "shots/cargo.jpg") to replace the placeholder.
   // featured: renders as a larger "代表作" card. tint: placeholder accent colour.
   const projects = [
-    { emoji: "🛡️", cat: "系统平台", title: "研究生院督导管理系统",
-      desc: "浙江工商大学研究生院的教学督导全流程数字化管理平台。",
-      url: "http://121.196.217.243/login", tint: "#FF4D1C", shot: "shots/supervision.png" },
     { emoji: "🦞", cat: "AI Agent", title: "会议室预约虾",
       desc: "会议室预约智能体：自然语言下单，自动排期与冲突检测。",
       url: "https://meetroomshrimp-gvfhrxz8.manus.space", tint: "#FF5DA2", shot: "shots/meetshrimp.png" },
@@ -107,7 +104,7 @@
       url: "https://virtual-universe-eight.vercel.app/", tint: "#7A5CFF", shot: "shots/solar.png" },
     { emoji: "🎨", cat: "作品展台", title: "首届 AI 黑客松作品展",
       desc: "信电学院 · 人工智能学院首届 AI 黑客松大赛学生作品展示。",
-      url: "http://43.133.22.250:8089/", tint: "#FF4D1C", shot: "shots/hackathon.png" },
+      url: "https://zjsu-ai-hackathon.vercel.app/", tint: "#FF4D1C", shot: "shots/hackathon.png" },
   ];
 
   const fmtHost = (u) => { try { return new URL(u).host; } catch { return u; } };
@@ -131,6 +128,29 @@
             <span class="pcard__arrow">↗</span>
           </div>
         </div>
+      </a>`).join("");
+  }
+
+  // early / practice works — kept small, collapsed behind a <details> toggle
+  const earlyWorks = [
+    { emoji: "🎬", title: "皮克斯动画展览馆 + 百炼 AI 助手", url: "https://app-7wopwmdzk2dd.appmiaoda.com" },
+    { emoji: "🎨", title: "创意协作空间", url: "https://app-7xtjhhrg15vl.appmiaoda.com" },
+    { emoji: "📈", title: "爆款文案视频探测器", url: "https://app-8d3qvlz16igx.appmiaoda.com" },
+    { emoji: "📚", title: "开堰研学网站", url: "https://wu5dpeypjtjvw.ok.kimi.link", note: "admin / admin123" },
+    { emoji: "🤖", title: "AutoTune-Master · 大模型调优多智能体协同平台", url: "https://appbuilder.baidu.com/s/srPSzqHn" },
+    { emoji: "🕯️", title: "心光祈愿 · 数字时代的祈福", url: "https://app-8ewx9e06r6kh.appmiaoda.com" },
+  ];
+
+  const eGrid = $("#earlyGrid");
+  if (eGrid) {
+    eGrid.innerHTML = earlyWorks.map((w) => `
+      <a class="ecard" href="${w.url}" target="_blank" rel="noopener">
+        <span class="ecard__emoji">${w.emoji}</span>
+        <span class="ecard__meta">
+          <span class="ecard__title">${w.title}${w.note ? ` <b class="ecard__note">${w.note}</b>` : ""}</span>
+          <span class="ecard__url">${fmtHost(w.url)}</span>
+        </span>
+        <span class="ecard__arrow">↗</span>
       </a>`).join("");
   }
 
