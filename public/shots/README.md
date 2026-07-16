@@ -11,12 +11,11 @@
 
 | # | 作品 | 文件名 | 线上 |
 |---|---|---|---|
-| 01 | 研究生院督导管理系统 | `supervision.png` | 121.196.217.243/login |
-| 02 | 会议室预约虾 | `meetshrimp.png` | meetroomshrimp-gvfhrxz8.manus.space |
-| 03 | 会议室预约虾 · 3D 数字孪生 | `zjgsu.png` | zjgsu.vercel.app |
-| 04 | CARGO CLAW · 智慧港口 | `cargo-claw.png` | cargo-claw.vercel.app |
-| 05 | 天府TWIN · 成都天府机场 | `aerotwin.png` | aerotwin-tfu.vercel.app |
-| 06 | 海上油田视觉模拟 | `deepblue-rig.png` | deepblue-rig.vercel.app |
-| 07 | 虚拟看房 · 样板间漫游 | `virtual-house.png` | virtual-reality-mocha.vercel.app |
-| 08 | 太阳系模拟与漫游 | `solar.png` | virtual-universe-eight.vercel.app |
-| 09 | 首届 AI 黑客松作品展 | `hackathon.png` | 43.133.22.250:8089 |
+| 01 | 会议室预约虾 | `meetshrimp.png` | meetroomshrimp-gvfhrxz8.manus.space |
+| 02 | 会议室预约虾 · 3D 数字孪生 | `zjgsu.png` | zjgsu.vercel.app |
+| 03 | CARGO CLAW · 智慧港口 | `cargo-claw.png` | cargo-claw.vercel.app |
+| 04 | 天府TWIN · 成都天府机场 | `aerotwin.png` | aerotwin-tfu.vercel.app |
+| 05 | 海上油田视觉模拟 | `deepblue-rig.png` | deepblue-rig.vercel.app |
+| 06 | 虚拟看房 · 样板间漫游 | `virtual-house.png` | virtual-reality-mocha.vercel.app |
+| 07 | 太阳系模拟与漫游 | `solar.png` | virtual-universe-eight.vercel.app |
+| 08 | 首届 AI 黑客松作品展 | `hackathon.png` | zjsu-ai-hackathon.vercel.app |
