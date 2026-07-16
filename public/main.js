@@ -134,6 +134,29 @@
       </a>`).join("");
   }
 
+  // early / practice works — kept small, collapsed behind a <details> toggle
+  const earlyWorks = [
+    { emoji: "🎬", title: "皮克斯动画展览馆 + 百炼 AI 助手", url: "https://app-7wopwmdzk2dd.appmiaoda.com" },
+    { emoji: "🎨", title: "创意协作空间", url: "https://app-7xtjhhrg15vl.appmiaoda.com" },
+    { emoji: "📈", title: "爆款文案视频探测器", url: "https://app-8d3qvlz16igx.appmiaoda.com" },
+    { emoji: "📚", title: "开堰研学网站", url: "https://wu5dpeypjtjvw.ok.kimi.link", note: "admin / admin123" },
+    { emoji: "🤖", title: "AutoTune-Master · 大模型调优多智能体协同平台", url: "https://appbuilder.baidu.com/s/srPSzqHn" },
+    { emoji: "🕯️", title: "心光祈愿 · 数字时代的祈福", url: "https://app-8ewx9e06r6kh.appmiaoda.com" },
+  ];
+
+  const eGrid = $("#earlyGrid");
+  if (eGrid) {
+    eGrid.innerHTML = earlyWorks.map((w) => `
+      <a class="ecard" href="${w.url}" target="_blank" rel="noopener">
+        <span class="ecard__emoji">${w.emoji}</span>
+        <span class="ecard__meta">
+          <span class="ecard__title">${w.title}${w.note ? ` <b class="ecard__note">${w.note}</b>` : ""}</span>
+          <span class="ecard__url">${fmtHost(w.url)}</span>
+        </span>
+        <span class="ecard__arrow">↗</span>
+      </a>`).join("");
+  }
+
   /* ===================================================================
      Hackathon timeline data → items
      =================================================================== */
