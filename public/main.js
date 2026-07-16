@@ -107,7 +107,7 @@
       url: "https://virtual-universe-eight.vercel.app/", tint: "#7A5CFF", shot: "shots/solar.png" },
     { emoji: "🎨", cat: "作品展台", title: "首届 AI 黑客松作品展",
       desc: "信电学院 · 人工智能学院首届 AI 黑客松大赛学生作品展示。",
-      url: "http://43.133.22.250:8089/", tint: "#FF4D1C", shot: "shots/hackathon.png" },
+      url: "https://zjsu-ai-hackathon.vercel.app/", tint: "#FF4D1C", shot: "shots/hackathon.png" },
   ];
 
   const fmtHost = (u) => { try { return new URL(u).host; } catch { return u; } };
