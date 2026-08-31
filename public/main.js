@@ -155,6 +155,180 @@
   }
 
   /* ===================================================================
+     Services — "把自己商品化" · a priced menu + WeChat/Alipay payment
+     Prices are value-anchored drafts; edit freely below.
+     Drop your own QR codes at: public/pay/wechat.png · public/pay/alipay.png
+     =================================================================== */
+  const services = [
+    {
+      emoji: "🦞", name: "AI 数字员工 · 定制交付", tag: "最受欢迎",
+      price: 2000, unit: "首月体验", was: "原价 ¥4000/月",
+      blurb: "把一个真实场景，养成一只专属的智能体——你只要结果，不碰过程。",
+      items: [
+        "一句话下单：会议室预约 / 智慧就业 / 图书馆 / 论文·PPT / 信息复盘…任选",
+        "独立部署、独立记忆与计费，镜像与账号都在你手里",
+        "三档用量可选：轻量 / 进阶 / 不限量",
+      ],
+      accent: "var(--red)",
+    },
+    {
+      emoji: "🎤", name: "企业 · 组织 AI 培训 / 讲座", tag: "现金流",
+      price: 6000, unit: "每场起", was: "半天 · 可定制",
+      blurb: "「养一只数字员工」实操工作坊，讲完就能上手，交付可复用的 Agent。",
+      items: [
+        "面向企业 / 协会 / 高校，落地案例：浙江医药 HR AI Agent、省青创协会",
+        "现场带教，把你的团队从 0 带到能自己搭",
+        "讲座 + 陪跑，把讲台变成你的 AI 落地起点",
+      ],
+      accent: "var(--blue)",
+    },
+    {
+      emoji: "🧒", name: "青少年 AI 实践课 / 黑客松带队", tag: "主 IP",
+      price: 6000, unit: "起", was: "按营 / 按场",
+      blurb: "7–13 岁 AI 认知启蒙，把真实项目讲进课堂；也做青少年黑客松技术兜底与带队。",
+      items: [
+        "AI 游戏 / 编程 / 建模 / 3D 打印，动手做真东西",
+        "青少年黑客松技术指导 · 带队（已验证家长付费）",
+        "在职一线 + 黑客松全链路经验，不是纸上谈兵",
+      ],
+      accent: "var(--lime)",
+    },
+    {
+      emoji: "🧭", name: "AI 上手陪跑 · 1 对 1", tag: "最易上手",
+      price: 300, unit: "1 小时", was: "个人 / 老师 / 老板均可",
+      blurb: "把你手头一个真实需求，现场跑成一个能用的 AI 小工具或数字员工雏形。",
+      items: [
+        "一对一线上 / 线下，边做边教",
+        "带走一个可继续用的成果，而不只是听懂",
+        "适合想入门 AI、又不想空学理论的人",
+      ],
+      accent: "#7A5CFF",
+    },
+    {
+      emoji: "💻", name: "Web · 系统 · 数字孪生开发", tag: "项目制",
+      quote: true, price: "五位数起", unit: "项目制",
+      blurb: "Web 前后端 / Java / 系统平台，以及港口·机场·油田级别的数字孪生可视化。",
+      items: [
+        "首款 + 尾款 + 维护，按项目范围报价",
+        "作品：督导系统、CARGO CLAW、天府 TWIN、海上油田…",
+        "IP 归属、维护周期先谈清再动工",
+      ],
+      accent: "var(--ink)",
+    },
+    {
+      emoji: "🏆", name: "黑客松 · 赛事全链路", tag: "面议",
+      quote: true, price: "按场面议", unit: "技术 / 评委 / 主办",
+      blurb: "从技术指导到赛事落地，20 场黑客松全链路经验，哪一环都能补位。",
+      items: [
+        "技术指导 / 评委 / 志愿统筹 / 主办执行 / 宣传落地设计",
+        "选手 → 志愿者 → 工作人员 → 主办 → 评委，全走过一遍",
+        "带队打赛，也帮你把一场赛事跑起来",
+      ],
+      accent: "var(--red)",
+    },
+  ];
+
+  const svcGrid = $("#servicesGrid");
+  if (svcGrid) {
+    svcGrid.innerHTML = services.map((s, i) => `
+      <article class="scard" style="--accent:${s.accent}">
+        <div class="scard__top">
+          <span class="scard__emoji">${s.emoji}</span>
+          ${s.tag ? `<span class="scard__tag">${s.tag}</span>` : ""}
+        </div>
+        <h3 class="scard__name">${s.name}</h3>
+        <div class="scard__price">
+          ${s.quote ? "" : `<span class="scard__cny">¥</span>`}<span class="scard__num">${s.price}</span>
+          ${s.unit ? `<span class="scard__unit">${s.unit}</span>` : ""}
+        </div>
+        ${s.was ? `<div class="scard__was">${s.was}</div>` : ""}
+        <p class="scard__blurb">${s.blurb}</p>
+        <ul class="scard__items">
+          ${s.items.map((it) => `<li>${it}</li>`).join("")}
+        </ul>
+        ${s.quote
+          ? `<button class="scard__buy scard__buy--quote" type="button" data-quote>预约洽谈 →</button>`
+          : `<button class="scard__buy" type="button" data-buy="${i}">购买 · 扫码支付 →</button>`}
+      </article>`).join("");
+  }
+
+  // ---- overlay open/close ----
+  const svc = $("#services");
+  const pay = $("#pay");
+  let lastFocus = null;
+
+  const openSvc = () => {
+    if (!svc) return;
+    lastFocus = document.activeElement;
+    clearTimeout(svc._hideT);
+    svc.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => svc.classList.add("is-open"));
+    svc.querySelector(".svc__x")?.focus();
+  };
+  const closeSvc = () => {
+    if (!svc) return;
+    closePay();
+    svc.classList.remove("is-open");
+    clearTimeout(svc._hideT);
+    svc._hideT = setTimeout(() => { svc.hidden = true; }, reduceMotion ? 0 : 320);
+    document.body.style.overflow = "";
+    lastFocus?.focus?.();
+  };
+
+  $$("[data-open-services]").forEach((b) => b.addEventListener("click", openSvc));
+  $$("[data-close-services]").forEach((b) => b.addEventListener("click", closeSvc));
+
+  // ---- payment dialog ----
+  const payTitle = $("#payTitle");
+  const payAmount = $("#payAmount");
+  const payNote = $("#payNote");
+  const payQrImg = $("#payQrImg");
+  let payMethod = "wechat";
+  let payService = null;
+
+  const setMethod = (m) => {
+    payMethod = m;
+    if (payQrImg) { payQrImg.classList.remove("is-missing"); payQrImg.src = `pay/${m}.png`; }
+    $$(".pay__tab").forEach((t) => {
+      const on = t.getAttribute("data-method") === m;
+      t.classList.toggle("is-on", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+    });
+  };
+
+  const openPay = (idx) => {
+    payService = services[idx];
+    if (!payService || !pay) return;
+    if (payTitle) payTitle.textContent = payService.name;
+    if (payAmount) payAmount.textContent = payService.price;
+    if (payNote) payNote.innerHTML =
+      `扫码后请输入金额 <b>¥${payService.price}</b>，备注你要的 <b>${payService.name}</b> 与联系方式，我会尽快联系你 🦞`;
+    setMethod("wechat");
+    clearTimeout(pay._hideT);
+    pay.hidden = false;
+    requestAnimationFrame(() => pay.classList.add("is-open"));
+    pay.querySelector(".pay__x")?.focus();
+  };
+  function closePay() {
+    if (!pay || pay.hidden) return;
+    pay.classList.remove("is-open");
+    clearTimeout(pay._hideT);
+    pay._hideT = setTimeout(() => { pay.hidden = true; }, reduceMotion ? 0 : 260);
+  }
+
+  $$("[data-buy]").forEach((b) => b.addEventListener("click", () => openPay(+b.getAttribute("data-buy"))));
+  $$("[data-quote]").forEach((b) => b.addEventListener("click", () => { closeSvc(); location.hash = "#contact"; }));
+  $$("[data-close-pay]").forEach((b) => b.addEventListener("click", closePay));
+  $$(".pay__tab").forEach((t) => t.addEventListener("click", () => setMethod(t.getAttribute("data-method"))));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (pay && !pay.hidden) closePay();
+    else if (svc && !svc.hidden) closeSvc();
+  });
+
+  /* ===================================================================
      Hackathon timeline data → items
      =================================================================== */
   const T = (label, type = "") => ({ label, type });

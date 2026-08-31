@@ -151,6 +151,7 @@
       </ul>
 
       <div class="hero__actions reveal" data-reveal>
+        <button class="btn btn--lime" type="button" data-open-services>🦞 我能提供的服务 <span class="btn__tag">SERVICES</span></button>
         <a class="btn btn--red" href="#projects">看看我的作品 →</a>
         <a class="btn btn--blue" href="#journey">黑客松之旅 🚀</a>
       </div>
@@ -395,6 +396,42 @@
       </div>
     </section>
   </main>
+
+  <!-- ============ SERVICES OVERLAY ============ -->
+  <div class="svc" id="services" role="dialog" aria-modal="true" aria-labelledby="svcTitle" hidden>
+    <div class="svc__backdrop" data-close-services></div>
+    <div class="svc__panel" role="document">
+      <button class="svc__x" type="button" aria-label="关闭" data-close-services>✕</button>
+      <div class="svc__head">
+        <span class="svc__eyebrow">🦞 把我商品化 · 明码标价</span>
+        <h2 class="svc__title" id="svcTitle">我能提供的服务 <span>/ SERVICES</span></h2>
+        <p class="svc__sub">按「价值」定价，不按工时。每一档都写清价格与内容——选好直接扫码，我尽快联系你。</p>
+      </div>
+      <div class="svc__grid" id="servicesGrid"></div>
+      <p class="svc__foot">拿不准选哪档？直接加微信 <b>com_cjy_util</b> 或邮件 <b>2975982783@qq.com</b>，我陪你把需求拆成一档服务。</p>
+    </div>
+
+    <!-- payment dialog (nested) -->
+    <div class="pay" id="pay" role="dialog" aria-modal="true" aria-labelledby="payTitle" hidden>
+      <div class="pay__backdrop" data-close-pay></div>
+      <div class="pay__card">
+        <button class="pay__x" type="button" aria-label="关闭" data-close-pay>✕</button>
+        <span class="pay__kicker">扫码支付 · 完成下单</span>
+        <h3 class="pay__title" id="payTitle">服务名</h3>
+        <div class="pay__amount"><span class="pay__cny">¥</span><span id="payAmount">0</span></div>
+        <div class="pay__tabs" role="tablist">
+          <button class="pay__tab is-on" type="button" role="tab" data-method="wechat" aria-selected="true">💚 微信支付</button>
+          <button class="pay__tab" type="button" role="tab" data-method="alipay" aria-selected="false">💙 支付宝</button>
+        </div>
+        <div class="pay__qr" id="payQr">
+          <img class="pay__qrimg" id="payQrImg" src="pay/wechat.png" alt="收款码" onerror="this.classList.add('is-missing')">
+          <span class="pay__qr-fallback">把收款码图片放到<br><code>public/pay/wechat.png</code></span>
+        </div>
+        <p class="pay__note" id="payNote">扫码后请输入金额 <b>¥0</b>，备注你的<b>服务名</b>与联系方式，我会尽快联系你 🦞</p>
+        <p class="pay__hint">扫码遇到问题？加微信 <b>com_cjy_util</b> 直接沟通。</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== lobster parade ===== -->
   <div class="ticker ticker--band ticker--reverse" aria-hidden="true">
