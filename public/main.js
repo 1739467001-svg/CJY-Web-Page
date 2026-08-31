@@ -159,95 +159,136 @@
      Prices are value-anchored drafts; edit freely below.
      Drop your own QR codes at: public/pay/wechat.png · public/pay/alipay.png
      =================================================================== */
+  const svcGroups = [
+    { id: "agent", label: "智能体 · 数字员工", icon: "🦞" },
+    { id: "edu",   label: "培训 · 教育",       icon: "🎓" },
+    { id: "dev",   label: "开发 · 数据",       icon: "💻" },
+    { id: "event", label: "赛事 · 活动",       icon: "🏆" },
+  ];
+
   const services = [
+    /* ---------- 智能体 · 数字员工 ---------- */
     {
-      emoji: "\ud83e\udd9e", name: "AI \u6570\u5b57\u5458\u5de5 \u00b7 \u5b9a\u5236\u4ea4\u4ed8", tag: "\u6700\u53d7\u6b22\u8fce",
-      price: 2000, was: 4000, unit: "\u9996\u6708 / \u6708\u5ea6",
-      blurb: "\u628a\u4e00\u4e2a\u771f\u5b9e\u573a\u666f\uff0c\u517b\u6210\u4e00\u53ea\u4e13\u5c5e\u7684\u667a\u80fd\u4f53\u2014\u2014\u4f60\u53ea\u8981\u7ed3\u679c\uff0c\u4e0d\u78b0\u8fc7\u7a0b\u3002",
+      group: "agent", emoji: "🦞", name: "AI 数字员工 · 定制交付", tag: "最受欢迎",
+      price: 2000, was: 4000, unit: "首月 / 月度",
+      blurb: "把一个真实场景，养成一只专属的智能体——你只要结果，不碰过程。",
       items: [
-        "\u4e00\u53e5\u8bdd\u4e0b\u5355\uff1a\u4f1a\u8bae\u5ba4\u9884\u7ea6 / \u667a\u6167\u5c31\u4e1a / \u56fe\u4e66\u9986 / \u8bba\u6587\u00b7PPT / \u4fe1\u606f\u590d\u76d8\u2026\u4efb\u9009",
-        "\u72ec\u7acb\u90e8\u7f72\u3001\u72ec\u7acb\u8bb0\u5fc6\u4e0e\u8ba1\u8d39\uff0c\u955c\u50cf\u4e0e\u8d26\u53f7\u90fd\u5728\u4f60\u624b\u91cc",
-        "\u4e09\u6863\u7528\u91cf\u53ef\u9009\uff1a\u8f7b\u91cf / \u8fdb\u9636 / \u4e0d\u9650\u91cf",
+        "一句话下单：会议室预约 / 智慧就业 / 图书馆 / 论文·PPT / 信息复盘…任选",
+        "独立部署、独立记忆与计费，镜像与账号都在你手里",
+        "三档用量可选：轻量 / 进阶 / 不限量",
       ],
       accent: "var(--red)",
     },
     {
-      emoji: "\ud83c\udfa4", name: "\u4f01\u4e1a \u00b7 \u7ec4\u7ec7 AI \u57f9\u8bad / \u8bb2\u5ea7", tag: "\u73b0\u91d1\u6d41",
-      price: 3000, was: 6000, unit: "\u6bcf\u573a / \u534a\u5929",
-      blurb: "\u300c\u517b\u4e00\u53ea\u6570\u5b57\u5458\u5de5\u300d\u5b9e\u64cd\u5de5\u4f5c\u574a\uff0c\u8bb2\u5b8c\u5c31\u80fd\u4e0a\u624b\uff0c\u4ea4\u4ed8\u53ef\u590d\u7528\u7684 Agent\u3002",
+      group: "agent", emoji: "🐎", name: "白龙马 · 可培育型定制智能体", tag: "高端定制",
+      quote: true, price: "¥8000 起", unit: "项目制",
+      blurb: "不是开箱即用的虾，是一匹从 0 养起的马：先联网学技能、装插件，再上岗干活，越养越强。",
       items: [
-        "\u9762\u5411\u4f01\u4e1a / \u534f\u4f1a / \u9ad8\u6821\uff0c\u843d\u5730\u6848\u4f8b\uff1a\u6d59\u6c5f\u533b\u836f HR AI Agent\u3001\u7701\u9752\u521b\u534f\u4f1a",
-        "\u73b0\u573a\u5e26\u6559\uff0c\u628a\u4f60\u7684\u56e2\u961f\u4ece 0 \u5e26\u5230\u80fd\u81ea\u5df1\u642d",
-        "\u8bb2\u5ea7 + \u966a\u8dd1\uff0c\u628a\u8bb2\u53f0\u53d8\u6210\u4f60\u7684 AI \u843d\u5730\u8d77\u70b9",
-      ],
-      accent: "var(--blue)",
-    },
-    {
-      emoji: "\ud83e\uddd2", name: "\u9752\u5c11\u5e74 AI \u5b9e\u8df5\u8bfe / \u9ed1\u5ba2\u677e\u5e26\u961f", tag: "\u4e3b IP",
-      price: 3000, was: 6000, unit: "\u6309\u8425 / \u6309\u573a",
-      blurb: "7\u201313 \u5c81 AI \u8ba4\u77e5\u542f\u8499\uff0c\u628a\u771f\u5b9e\u9879\u76ee\u8bb2\u8fdb\u8bfe\u5802\uff1b\u4e5f\u505a\u9752\u5c11\u5e74\u9ed1\u5ba2\u677e\u6280\u672f\u515c\u5e95\u4e0e\u5e26\u961f\u3002",
-      items: [
-        "AI \u6e38\u620f / \u7f16\u7a0b / \u5efa\u6a21 / 3D \u6253\u5370\uff0c\u52a8\u624b\u505a\u771f\u4e1c\u897f",
-        "\u9752\u5c11\u5e74\u9ed1\u5ba2\u677e\u6280\u672f\u6307\u5bfc \u00b7 \u5e26\u961f\uff08\u5df2\u9a8c\u8bc1\u5bb6\u957f\u4ed8\u8d39\uff09",
-        "\u5728\u804c\u4e00\u7ebf + \u9ed1\u5ba2\u677e\u5168\u94fe\u8def\u7ecf\u9a8c\uff0c\u4e0d\u662f\u7eb8\u4e0a\u8c08\u5175",
-      ],
-      accent: "var(--lime)",
-    },
-    {
-      emoji: "\ud83e\udd90", name: "\u5c0f\u9f99\u867e OpenClaw \u00b7 \u5373\u7528\u578b\u667a\u80fd\u4f53", tag: "\u5f00\u7bb1\u5373\u7528",
-      price: 200, unit: "\u8d77 / \u53ea",
-      blurb: "\u9884\u8bbe\u597d\u7684\u6807\u51c6\u5c0f\u9f99\u867e\uff0c\u95ee\u4e86\u5c31\u7b54\u3001\u62ff\u6765\u5c31\u7528\u3002\u5b89\u88c5\u3001\u7ef4\u62a4\u3001\u5b9a\u5236\u660e\u7801\u6807\u4ef7\u3002",
-      addons: [
-        ["\u667a\u80fd\u4f53\u672c\u4f53", 200],
-        ["\u5b89\u88c5\u90e8\u7f72", 30],
-        ["\u5305\u6708\u7ef4\u62a4", 100],
-        ["\u4e2a\u6027\u5316\u5b9a\u5236", 60],
-      ],
-      items: [
-        "\u4f1a\u8bae\u5ba4\u9884\u7ea6 / \u667a\u6167\u5c31\u4e1a / \u56fe\u4e66\u9986 / \u8c61\u68cb\u6307\u5bfc\u2026\u73b0\u6210\u867e\u4efb\u9009",
-        "\u6309\u9700\u52a0\u88c5\uff1a\u53ea\u8981\u672c\u4f53\u4e5f\u884c\uff0c\u8981\u6211\u88c5\u597d\u3001\u5305\u7ef4\u62a4\u4e5f\u884c",
-        "\u9002\u5408\u5148\u82b1\u5c0f\u94b1\u8bd5\u4e00\u53ea\uff0c\u597d\u7528\u518d\u4e0a\u5b9a\u5236",
-      ],
-      accent: "#FF5DA2",
-    },
-    {
-      emoji: "\ud83e\udded", name: "AI \u4e0a\u624b\u966a\u8dd1 \u00b7 1 \u5bf9 1", tag: "\u6700\u6613\u4e0a\u624b",
-      price: 150, was: 300, unit: "1 \u5c0f\u65f6",
-      blurb: "\u628a\u4f60\u624b\u5934\u4e00\u4e2a\u771f\u5b9e\u9700\u6c42\uff0c\u73b0\u573a\u8dd1\u6210\u4e00\u4e2a\u80fd\u7528\u7684 AI \u5c0f\u5de5\u5177\u6216\u6570\u5b57\u5458\u5de5\u96cf\u5f62\u3002",
-      items: [
-        "\u4e00\u5bf9\u4e00\u7ebf\u4e0a / \u7ebf\u4e0b\uff0c\u8fb9\u505a\u8fb9\u6559",
-        "\u5e26\u8d70\u4e00\u4e2a\u53ef\u7ee7\u7eed\u7528\u7684\u6210\u679c\uff0c\u800c\u4e0d\u53ea\u662f\u542c\u61c2",
-        "\u9002\u5408\u60f3\u5165\u95e8 AI\u3001\u53c8\u4e0d\u60f3\u7a7a\u5b66\u7406\u8bba\u7684\u4eba",
+        "为「要一个量身定制的员工」的客户而做，能力随业务生长",
+        "深度接入你的流程与数据，长出别人复制不走的护城河",
+        "含需求梳理 + 训练调优 + 交付陪跑；IP 归属先谈清",
       ],
       accent: "#7A5CFF",
     },
     {
-      emoji: "\ud83d\udcbb", name: "Web \u00b7 \u7cfb\u7edf \u00b7 \u6570\u5b57\u5b6a\u751f\u5f00\u53d1", tag: "\u9879\u76ee\u5236",
-      quote: true, price: "\u4e94\u4f4d\u6570\u8d77", unit: "\u9879\u76ee\u5236",
-      blurb: "Web \u524d\u540e\u7aef / Java / \u7cfb\u7edf\u5e73\u53f0\uff0c\u4ee5\u53ca\u6e2f\u53e3\u00b7\u673a\u573a\u00b7\u6cb9\u7530\u7ea7\u522b\u7684\u6570\u5b57\u5b6a\u751f\u53ef\u89c6\u5316\u3002",
+      group: "agent", emoji: "🦐", name: "小龙虾 OpenClaw · 即用型智能体", tag: "开箱即用",
+      price: 200, unit: "起 / 只",
+      blurb: "预设好的标准小龙虾，问了就答、拿来就用。安装、维护、定制明码标价。",
+      addons: [["智能体本体", 200], ["安装部署", 30], ["包月维护", 100], ["个性化定制", 60]],
       items: [
-        "\u9996\u6b3e + \u5c3e\u6b3e + \u7ef4\u62a4\uff0c\u6309\u9879\u76ee\u8303\u56f4\u62a5\u4ef7",
-        "\u4f5c\u54c1\uff1aCARGO CLAW\u3001\u5929\u5e9c TWIN\u3001\u6d77\u4e0a\u6cb9\u7530\u2026",
-        "IP \u5f52\u5c5e\u3001\u7ef4\u62a4\u5468\u671f\u5148\u8c08\u6e05\u518d\u52a8\u5de5",
+        "会议室预约 / 智慧就业 / 图书馆 / 象棋指导…现成虾任选",
+        "按需加装：只要本体也行，要我装好、包维护也行",
+        "适合先花小钱试一只，好用再上定制",
+      ],
+      accent: "#FF5DA2",
+    },
+
+    /* ---------- 培训 · 教育 ---------- */
+    {
+      group: "edu", emoji: "🎤", name: "企业 · 组织 AI 培训 / 讲座", tag: "现金流",
+      price: 3000, was: 6000, unit: "每场 / 半天",
+      blurb: "「养一只数字员工」实操工作坊，讲完就能上手，交付可复用的 Agent。",
+      items: [
+        "面向企业 / 协会 / 高校，落地案例：浙江医药 HR AI Agent、省青创协会",
+        "现场带教，把你的团队从 0 带到能自己搭",
+        "讲座 + 陪跑，把讲台变成你的 AI 落地起点",
+      ],
+      accent: "var(--blue)",
+    },
+    {
+      group: "edu", emoji: "🏫", name: "高校 · 学院 AI 落地咨询", tag: "政策红利",
+      quote: true, price: "按项目面议", unit: "学院 / 全校",
+      blurb: "国家明年考核行业 AI 落地率，浙江更高——把政策要求，变成真正跑起来的系统。",
+      items: [
+        "校内三套系统落地经验：督导管理、未来课堂、会议室预约",
+        "从场景盘点 → 选型 → 落地 → 验收，全程陪跑",
+        "依托钉钉等既有生态先跑通，不折腾自建",
       ],
       accent: "var(--ink)",
     },
     {
-      emoji: "\ud83c\udfc6", name: "\u9ed1\u5ba2\u677e \u00b7 \u8d5b\u4e8b\u5168\u94fe\u8def", tag: "\u9762\u8bae",
-      quote: true, price: "\u6309\u573a\u9762\u8bae", unit: "\u6280\u672f / \u8bc4\u59d4 / \u4e3b\u529e",
-      blurb: "\u4ece\u6280\u672f\u6307\u5bfc\u5230\u8d5b\u4e8b\u843d\u5730\uff0c20 \u573a\u9ed1\u5ba2\u677e\u5168\u94fe\u8def\u7ecf\u9a8c\uff0c\u54ea\u4e00\u73af\u90fd\u80fd\u8865\u4f4d\u3002",
+      group: "edu", emoji: "🧒", name: "青少年 AI 实践课 / 黑客松带队", tag: "主 IP",
+      price: 3000, was: 6000, unit: "按营 / 按场",
+      blurb: "7–13 岁 AI 认知启蒙，把真实项目讲进课堂；也做青少年黑客松技术兜底与带队。",
       items: [
-        "\u5fd7\u613f\u8005 / \u5de5\u4f5c\u4eba\u5458\uff1a\u00a5150\u2013300 \u4e00\u5929",
-        "\u6280\u672f\u6307\u5bfc / \u8bc4\u59d4 / \u5fd7\u613f\u7edf\u7b79 / \u4e3b\u529e\u6267\u884c / \u5ba3\u4f20\u843d\u5730\uff1a\u6309\u573a\u9762\u8bae",
-        "\u9009\u624b \u2192 \u5fd7\u613f\u8005 \u2192 \u5de5\u4f5c\u4eba\u5458 \u2192 \u4e3b\u529e \u2192 \u8bc4\u59d4\uff0c\u5168\u8d70\u8fc7\u4e00\u904d",
+        "AI 游戏 / 编程 / 建模 / 3D 打印，动手做真东西",
+        "青少年黑客松技术指导 · 带队（已验证家长付费）",
+        "在职一线 + 黑客松全链路经验，不是纸上谈兵",
+      ],
+      accent: "var(--lime)",
+    },
+    {
+      group: "edu", emoji: "🧭", name: "AI 上手陪跑 · 1 对 1", tag: "最易上手",
+      price: 150, was: 300, unit: "1 小时",
+      blurb: "把你手头一个真实需求，现场跑成一个能用的 AI 小工具或数字员工雏形。",
+      items: [
+        "一对一线上 / 线下，边做边教",
+        "带走一个可继续用的成果，而不只是听懂",
+        "适合想入门 AI、又不想空学理论的人",
+      ],
+      accent: "#2BB673",
+    },
+
+    /* ---------- 开发 · 数据 ---------- */
+    {
+      group: "dev", emoji: "📊", name: "信息收集 · 知识库搭建 · 数据分析", tag: "本科老本行",
+      price: 100, unit: "起 / 单次",
+      blurb: "软件工程 + 大数据的老本行：把散的资料收拢、把知识变成 AI 能用的底座、把数据讲成结论。",
+      items: [
+        "¥100–300，按数据量与交付复杂度定",
+        "资料 / 竞品 / 行业信息批量收集与结构化整理",
+        "知识库搭建：喂给 AI 的私有知识底座（RAG 可用）",
+        "数据清洗、统计分析与可视化报表",
+      ],
+      accent: "#FF9F1C",
+    },
+    {
+      group: "dev", emoji: "💻", name: "Web · 系统 · 数字孪生开发", tag: "项目制",
+      quote: true, price: "五位数起", unit: "项目制",
+      blurb: "Web 前后端 / Java / 系统平台，以及港口·机场·油田级别的数字孪生可视化。",
+      items: [
+        "首款 + 尾款 + 维护，按项目范围报价",
+        "作品：CARGO CLAW、天府 TWIN、海上油田…",
+        "IP 归属、维护周期先谈清再动工",
+      ],
+      accent: "#2B47F0",
+    },
+
+    /* ---------- 赛事 · 活动 ---------- */
+    {
+      group: "event", emoji: "🏆", name: "黑客松 · 赛事全链路", tag: "面议",
+      quote: true, price: "按场面议", unit: "技术 / 评委 / 主办",
+      blurb: "从技术指导到赛事落地，20 场黑客松全链路经验，哪一环都能补位。",
+      items: [
+        "志愿者 / 工作人员：¥150–300 一天",
+        "技术指导 / 评委 / 志愿统筹 / 主办执行 / 宣传落地：按场面议",
+        "选手 → 志愿者 → 工作人员 → 主办 → 评委，全走过一遍",
       ],
       accent: "var(--red)",
     },
   ];
 
-  const svcGrid = $("#servicesGrid");
-  if (svcGrid) {
-    svcGrid.innerHTML = services.map((s, i) => `
+  const svcCard = (s, i) => `
       <article class="scard" style="--accent:${s.accent}">
         <div class="scard__top">
           <span class="scard__emoji">${s.emoji}</span>
@@ -255,24 +296,36 @@
         </div>
         <h3 class="scard__name">${s.name}</h3>
         <div class="scard__price">
-          ${s.quote ? "" : `<span class="scard__cny">\u00a5</span>`}<span class="scard__num">${s.price}</span>
+          ${s.quote ? "" : `<span class="scard__cny">¥</span>`}<span class="scard__num">${s.price}</span>
           ${s.unit ? `<span class="scard__unit">${s.unit}</span>` : ""}
         </div>
         ${s.was ? `<div class="scard__deal">
-          <s class="scard__orig">\u539f\u4ef7 \u00a5${s.was}</s>
-          <span class="scard__off">\u9650\u65f6\u83b7\u5ba2\u4ef7 \u00b7 5 \u6298</span>
+          <s class="scard__orig">原价 ¥${s.was}</s>
+          <span class="scard__off">限时获客价 · 5 折</span>
         </div>` : ""}
         <p class="scard__blurb">${s.blurb}</p>
         ${s.addons ? `<ul class="scard__addons">
-          ${s.addons.map(([label, amt]) => `<li><span>${label}</span><b>\u00a5${amt}</b></li>`).join("")}
+          ${s.addons.map(([label, amt]) => `<li><span>${label}</span><b>¥${amt}</b></li>`).join("")}
         </ul>` : ""}
         <ul class="scard__items">
           ${s.items.map((it) => `<li>${it}</li>`).join("")}
         </ul>
         ${s.quote
-          ? `<button class="scard__buy scard__buy--quote" type="button" data-quote>\u9884\u7ea6\u6d3d\u8c08 \u2192</button>`
-          : `<button class="scard__buy" type="button" data-buy="${i}">\u8d2d\u4e70 \u00b7 \u626b\u7801\u652f\u4ed8 \u2192</button>`}
-      </article>`).join("");
+          ? `<button class="scard__buy scard__buy--quote" type="button" data-quote>预约洽谈 →</button>`
+          : `<button class="scard__buy" type="button" data-buy="${i}">购买 · 扫码支付 →</button>`}
+      </article>`;
+
+  const svcGrid = $("#servicesGrid");
+  if (svcGrid) {
+    svcGrid.innerHTML = svcGroups.map((g) => {
+      const inGroup = services.map((s, i) => [s, i]).filter(([s]) => s.group === g.id);
+      if (!inGroup.length) return "";
+      return `
+      <section class="svcgroup">
+        <h3 class="svcgroup__title"><span class="svcgroup__icon">${g.icon}</span>${g.label}<i class="svcgroup__rule"></i></h3>
+        <div class="svcgroup__grid">${inGroup.map(([s, i]) => svcCard(s, i)).join("")}</div>
+      </section>`;
+    }).join("");
   }
 
   // ---- overlay open/close ----
