@@ -979,7 +979,13 @@ mark {
 .scard__cny { font-weight: 700; font-size: 1.1rem; }
 .scard__num { font-family: var(--sans); font-weight: 800; font-size: 2.1rem; line-height: 1; letter-spacing: -.01em; }
 .scard__unit { font-size: .82rem; color: var(--muted); }
-.scard__was { font-family: var(--mono); font-size: .72rem; color: var(--muted); margin-top: .25rem; }
+.scard__deal { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-top: .35rem; }
+.scard__orig { font-family: var(--mono); font-size: .78rem; color: var(--muted); text-decoration-thickness: 2px; }
+.scard__off { font-family: var(--mono); font-size: .66rem; font-weight: 700; background: var(--red); color: var(--paper); padding: .12rem .4rem; border-radius: 5px; }
+.scard__addons { list-style: none; display: flex; flex-direction: column; gap: .3rem; margin: .85rem 0 .2rem; padding: .6rem .75rem; background: var(--paper); border: 2px dashed rgba(20,17,11,.28); border-radius: 9px; }
+.scard__addons li { display: flex; align-items: center; justify-content: space-between; gap: .6rem; font-size: .8rem; }
+.scard__addons li span { color: var(--muted); }
+.scard__addons li b { font-family: var(--mono); font-size: .84rem; }
 .scard__blurb { font-size: .88rem; color: var(--muted); margin: .7rem 0 .8rem; line-height: 1.5; }
 .scard__items { list-style: none; display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1.1rem; flex: 1; }
 .scard__items li { position: relative; padding-left: 1.4rem; font-size: .84rem; line-height: 1.45; }
@@ -1029,6 +1035,7 @@ mark {
 .pay__qrimg.is-missing ~ .pay__qr-fallback { display: grid; place-items: center; }
 .pay__note { font-size: .84rem; line-height: 1.55; color: var(--ink); margin-bottom: .6rem; }
 .pay__note b { color: var(--red); }
+.pay__addon { display: inline-block; margin-top: .4rem; font-size: .78rem; color: var(--muted); }
 .pay__hint { font-size: .76rem; color: var(--muted); }
 .pay__hint b { color: var(--ink); font-family: var(--mono); }
 
