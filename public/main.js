@@ -159,251 +159,46 @@
      Prices are value-anchored drafts; edit freely below.
      Drop your own QR codes at: public/pay/wechat.png · public/pay/alipay.png
      =================================================================== */
-  const svcGroups = [
-    { id: "agent", label: "智能体 · 数字员工", icon: "🦞" },
-    { id: "edu",   label: "培训 · 教育",       icon: "🎓" },
-    { id: "dev",   label: "开发 · 数据",       icon: "💻" },
-    { id: "event", label: "赛事 · 活动",       icon: "🏆" },
-  ];
-
-  const services = [
-    /* ---------- 智能体 · 数字员工 ---------- */
-    {
-      group: "agent", emoji: "🦞", name: "AI 数字员工 · 定制交付", tag: "最受欢迎",
-      price: 2000, was: 4000, unit: "首月 / 月度",
-      blurb: "把一个真实场景，养成一只专属的智能体——你只要结果，不碰过程。",
-      items: [
-        "一句话下单：会议室预约 / 智慧就业 / 图书馆 / 论文·PPT / 信息复盘…任选",
-        "独立部署、独立记忆与计费，镜像与账号都在你手里",
-        "三档用量可选：轻量 / 进阶 / 不限量",
-      ],
-      accent: "var(--red)",
-    },
-    {
-      group: "agent", emoji: "🐎", name: "白龙马 · 可培育型定制智能体", tag: "高端定制",
-      quote: true, price: "¥8000 起", unit: "项目制",
-      blurb: "不是开箱即用的虾，是一匹从 0 养起的马：先联网学技能、装插件，再上岗干活，越养越强。",
-      items: [
-        "为「要一个量身定制的员工」的客户而做，能力随业务生长",
-        "深度接入你的流程与数据，长出别人复制不走的护城河",
-        "含需求梳理 + 训练调优 + 交付陪跑；IP 归属先谈清",
-      ],
-      accent: "#7A5CFF",
-    },
-    {
-      group: "agent", emoji: "🦐", name: "小龙虾 OpenClaw · 即用型智能体", tag: "开箱即用",
-      price: 200, unit: "起 / 只",
-      blurb: "预设好的标准小龙虾，问了就答、拿来就用。安装、维护、定制明码标价。",
-      addons: [["智能体本体", 200], ["安装部署", 30], ["包月维护", 100], ["个性化定制", 60]],
-      items: [
-        "会议室预约 / 智慧就业 / 图书馆 / 象棋指导…现成虾任选",
-        "按需加装：只要本体也行，要我装好、包维护也行",
-        "适合先花小钱试一只，好用再上定制",
-      ],
-      accent: "#FF5DA2",
-    },
-
-    /* ---------- 培训 · 教育 ---------- */
-    {
-      group: "edu", emoji: "🎤", name: "企业 · 组织 AI 培训 / 讲座", tag: "现金流",
-      price: 3000, was: 6000, unit: "每场 / 半天",
-      blurb: "「养一只数字员工」实操工作坊，讲完就能上手，交付可复用的 Agent。",
-      items: [
-        "面向企业 / 协会 / 高校，落地案例：浙江医药 HR AI Agent、省青创协会",
-        "现场带教，把你的团队从 0 带到能自己搭",
-        "讲座 + 陪跑，把讲台变成你的 AI 落地起点",
-      ],
-      accent: "var(--blue)",
-    },
-    {
-      group: "edu", emoji: "🏫", name: "高校 · 学院 AI 落地咨询", tag: "政策红利",
-      quote: true, price: "按项目面议", unit: "学院 / 全校",
-      blurb: "国家明年考核行业 AI 落地率，浙江更高——把政策要求，变成真正跑起来的系统。",
-      items: [
-        "校内三套系统落地经验：督导管理、未来课堂、会议室预约",
-        "从场景盘点 → 选型 → 落地 → 验收，全程陪跑",
-        "依托钉钉等既有生态先跑通，不折腾自建",
-      ],
-      accent: "var(--ink)",
-    },
-    {
-      group: "edu", emoji: "🧒", name: "青少年 AI 实践课 / 黑客松带队", tag: "主 IP",
-      price: 3000, was: 6000, unit: "按营 / 按场",
-      blurb: "7–13 岁 AI 认知启蒙，把真实项目讲进课堂；也做青少年黑客松技术兜底与带队。",
-      items: [
-        "AI 游戏 / 编程 / 建模 / 3D 打印，动手做真东西",
-        "青少年黑客松技术指导 · 带队（已验证家长付费）",
-        "在职一线 + 黑客松全链路经验，不是纸上谈兵",
-      ],
-      accent: "var(--lime)",
-    },
-    {
-      group: "edu", emoji: "🧭", name: "AI 上手陪跑 · 1 对 1", tag: "最易上手",
-      price: 150, was: 300, unit: "1 小时",
-      blurb: "把你手头一个真实需求，现场跑成一个能用的 AI 小工具或数字员工雏形。",
-      items: [
-        "一对一线上 / 线下，边做边教",
-        "带走一个可继续用的成果，而不只是听懂",
-        "适合想入门 AI、又不想空学理论的人",
-      ],
-      accent: "#2BB673",
-    },
-
-    /* ---------- 开发 · 数据 ---------- */
-    {
-      group: "dev", emoji: "📊", name: "信息收集 · 知识库搭建 · 数据分析", tag: "本科老本行",
-      price: 100, unit: "起 / 单次",
-      blurb: "软件工程 + 大数据的老本行：把散的资料收拢、把知识变成 AI 能用的底座、把数据讲成结论。",
-      items: [
-        "¥100–300，按数据量与交付复杂度定",
-        "资料 / 竞品 / 行业信息批量收集与结构化整理",
-        "知识库搭建：喂给 AI 的私有知识底座（RAG 可用）",
-        "数据清洗、统计分析与可视化报表",
-      ],
-      accent: "#FF9F1C",
-    },
-    {
-      group: "dev", emoji: "💻", name: "Web · 系统 · 数字孪生开发", tag: "项目制",
-      quote: true, price: "五位数起", unit: "项目制",
-      blurb: "Web 前后端 / Java / 系统平台，以及港口·机场·油田级别的数字孪生可视化。",
-      items: [
-        "首款 + 尾款 + 维护，按项目范围报价",
-        "作品：CARGO CLAW、天府 TWIN、海上油田…",
-        "IP 归属、维护周期先谈清再动工",
-      ],
-      accent: "#2B47F0",
-    },
-
-    /* ---------- 赛事 · 活动 ---------- */
-    {
-      group: "event", emoji: "🏆", name: "黑客松 · 赛事全链路", tag: "面议",
-      quote: true, price: "按场面议", unit: "技术 / 评委 / 主办",
-      blurb: "从技术指导到赛事落地，20 场黑客松全链路经验，哪一环都能补位。",
-      items: [
-        "志愿者 / 工作人员：¥150–300 一天",
-        "技术指导 / 评委 / 志愿统筹 / 主办执行 / 宣传落地：按场面议",
-        "选手 → 志愿者 → 工作人员 → 主办 → 评委，全走过一遍",
-      ],
-      accent: "var(--red)",
-    },
-  ];
-
-  const svcCard = (s, i) => `
-      <article class="scard" style="--accent:${s.accent}">
-        <div class="scard__top">
-          <span class="scard__emoji">${s.emoji}</span>
-          ${s.tag ? `<span class="scard__tag">${s.tag}</span>` : ""}
-        </div>
-        <h3 class="scard__name">${s.name}</h3>
-        <div class="scard__price">
-          ${s.quote ? "" : `<span class="scard__cny">¥</span>`}<span class="scard__num">${s.price}</span>
-          ${s.unit ? `<span class="scard__unit">${s.unit}</span>` : ""}
-        </div>
-        ${s.was ? `<div class="scard__deal">
-          <s class="scard__orig">原价 ¥${s.was}</s>
-          <span class="scard__off">限时获客价 · 5 折</span>
-        </div>` : ""}
-        <p class="scard__blurb">${s.blurb}</p>
-        ${s.addons ? `<ul class="scard__addons">
-          ${s.addons.map(([label, amt]) => `<li><span>${label}</span><b>¥${amt}</b></li>`).join("")}
-        </ul>` : ""}
-        <ul class="scard__items">
-          ${s.items.map((it) => `<li>${it}</li>`).join("")}
-        </ul>
-        ${s.quote
-          ? `<button class="scard__buy scard__buy--quote" type="button" data-quote>预约洽谈 →</button>`
-          : `<button class="scard__buy" type="button" data-buy="${i}">购买 · 扫码支付 →</button>`}
-      </article>`;
-
-  const svcGrid = $("#servicesGrid");
-  if (svcGrid) {
-    svcGrid.innerHTML = svcGroups.map((g) => {
-      const inGroup = services.map((s, i) => [s, i]).filter(([s]) => s.group === g.id);
-      if (!inGroup.length) return "";
-      return `
-      <section class="svcgroup">
-        <h3 class="svcgroup__title"><span class="svcgroup__icon">${g.icon}</span>${g.label}<i class="svcgroup__rule"></i></h3>
-        <div class="svcgroup__grid">${inGroup.map(([s, i]) => svcCard(s, i)).join("")}</div>
-      </section>`;
-    }).join("");
-  }
-
-  // ---- overlay open/close ----
+  /* ---------- 服务清单：弹窗开关 + #services 深链 ----------
+     卡片数据与支付/联系弹窗都在 services-data.js（与 services.html 共用）。 */
   const svc = $("#services");
-  const pay = $("#pay");
-  let lastFocus = null;
+  if (svc && window.CJYServices) {
+    window.CJYServices.mount($("#servicesGrid"));
 
-  const openSvc = () => {
-    if (!svc) return;
-    lastFocus = document.activeElement;
-    clearTimeout(svc._hideT);
-    svc.hidden = false;
-    document.body.style.overflow = "hidden";
-    requestAnimationFrame(() => svc.classList.add("is-open"));
-    svc.querySelector(".svc__x")?.focus();
-  };
-  const closeSvc = () => {
-    if (!svc) return;
-    closePay();
-    svc.classList.remove("is-open");
-    clearTimeout(svc._hideT);
-    svc._hideT = setTimeout(() => { svc.hidden = true; }, reduceMotion ? 0 : 320);
-    document.body.style.overflow = "";
-    lastFocus?.focus?.();
-  };
+    let lastFocus = null;
+    const openSvc = (push = true) => {
+      lastFocus = document.activeElement;
+      clearTimeout(svc._hideT);
+      svc.hidden = false;
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => svc.classList.add("is-open"));
+      svc.querySelector(".svc__x")?.focus();
+      // 让 URL 可分享：#services
+      if (push && location.hash !== "#services") history.pushState(null, "", "#services");
+    };
+    const closeSvc = () => {
+      svc.classList.remove("is-open");
+      clearTimeout(svc._hideT);
+      svc._hideT = setTimeout(() => { svc.hidden = true; }, reduceMotion ? 0 : 320);
+      document.body.style.overflow = "";
+      lastFocus?.focus?.();
+      if (location.hash === "#services") history.pushState(null, "", location.pathname);
+    };
 
-  $$("[data-open-services]").forEach((b) => b.addEventListener("click", openSvc));
-  $$("[data-close-services]").forEach((b) => b.addEventListener("click", closeSvc));
-
-  // ---- payment dialog ----
-  const payTitle = $("#payTitle");
-  const payAmount = $("#payAmount");
-  const payNote = $("#payNote");
-  const payQrImg = $("#payQrImg");
-  let payMethod = "wechat";
-  let payService = null;
-
-  const setMethod = (m) => {
-    payMethod = m;
-    if (payQrImg) { payQrImg.classList.remove("is-missing"); payQrImg.src = `pay/${m}.png`; }
-    $$(".pay__tab").forEach((t) => {
-      const on = t.getAttribute("data-method") === m;
-      t.classList.toggle("is-on", on);
-      t.setAttribute("aria-selected", on ? "true" : "false");
+    $$("[data-open-services]").forEach((b) => b.addEventListener("click", () => openSvc()));
+    $$("[data-close-services]").forEach((b) => b.addEventListener("click", closeSvc));
+    document.addEventListener("keydown", (e) => {
+      // 支付/联系弹窗自己会先吃掉 Esc；都关了才轮到服务清单
+      if (e.key === "Escape" && !svc.hidden
+          && document.getElementById("pay")?.hidden !== false
+          && document.getElementById("contact-dlg")?.hidden !== false) closeSvc();
     });
-  };
 
-  const openPay = (idx) => {
-    payService = services[idx];
-    if (!payService || !pay) return;
-    if (payTitle) payTitle.textContent = payService.name;
-    if (payAmount) payAmount.textContent = payService.price;
-    if (payNote) payNote.innerHTML =
-      `扫码后请输入金额 <b>¥${payService.price}</b>，备注你要的 <b>${payService.name}</b> 与联系方式，我会尽快联系你 🦞`
-      + (payService.addons ? `<br><span class="pay__addon">需要安装 / 维护 / 定制？按上方明细加总后填写金额即可。</span>` : "");
-    setMethod("wechat");
-    clearTimeout(pay._hideT);
-    pay.hidden = false;
-    requestAnimationFrame(() => pay.classList.add("is-open"));
-    pay.querySelector(".pay__x")?.focus();
-  };
-  function closePay() {
-    if (!pay || pay.hidden) return;
-    pay.classList.remove("is-open");
-    clearTimeout(pay._hideT);
-    pay._hideT = setTimeout(() => { pay.hidden = true; }, reduceMotion ? 0 : 260);
+    // 直接以 #services 打开，或前进/后退
+    const syncHash = () => { if (location.hash === "#services") openSvc(false); else if (!svc.hidden) closeSvc(); };
+    if (location.hash === "#services") openSvc(false);
+    window.addEventListener("popstate", syncHash);
   }
-
-  $$("[data-buy]").forEach((b) => b.addEventListener("click", () => openPay(+b.getAttribute("data-buy"))));
-  $$("[data-quote]").forEach((b) => b.addEventListener("click", () => { closeSvc(); location.hash = "#contact"; }));
-  $$("[data-close-pay]").forEach((b) => b.addEventListener("click", closePay));
-  $$(".pay__tab").forEach((t) => t.addEventListener("click", () => setMethod(t.getAttribute("data-method"))));
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    if (pay && !pay.hidden) closePay();
-    else if (svc && !svc.hidden) closeSvc();
-  });
 
   /* ===================================================================
      Hackathon timeline data → items

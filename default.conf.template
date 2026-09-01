@@ -32,7 +32,8 @@ server {
     # on-brand 404 page (keeps a 404 status)
     error_page 404 /404.html;
 
+    # 无扩展名的干净 URL：/services -> /services.html
     location / {
-        try_files $uri $uri/ =404;
+        try_files $uri $uri.html $uri/ =404;
     }
 }

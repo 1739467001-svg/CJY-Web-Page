@@ -1005,7 +1005,7 @@ mark {
 .scard__buy--quote { background: transparent; color: var(--ink); }
 
 /* payment dialog */
-.pay { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: 1rem; }
+.pay { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; padding: 1rem; }
 .pay[hidden] { display: none; }
 .pay__backdrop { position: absolute; inset: 0; background: rgba(20,17,11,.5); backdrop-filter: blur(2px); opacity: 0; transition: opacity .22s var(--ease); }
 .pay.is-open .pay__backdrop { opacity: 1; }
@@ -1029,7 +1029,8 @@ mark {
 }
 .pay__tab.is-on { background: var(--lime); box-shadow: var(--sh-sm); transform: translate(-1px,-1px); }
 .pay__qr {
-  position: relative; width: 210px; height: 210px; margin: 0 auto 1rem; display: grid; place-items: center;
+  position: relative; width: 232px; height: auto; aspect-ratio: 20 / 23; margin: 0 auto 1rem;
+  display: grid; place-items: center; padding: 6px;
   background: #fff; border: var(--bd-2); border-radius: 12px; overflow: hidden;
 }
 .pay__qrimg { width: 100%; height: 100%; object-fit: contain; }
@@ -1044,7 +1045,7 @@ mark {
 .pay__hint b { color: var(--ink); font-family: var(--mono); }
 
 @media (max-width: 520px) {
-  .pay__qr { width: 180px; height: 180px; }
+  .pay__qr { width: 200px; }
   .svc__panel { border-radius: 16px; }
 }
 
@@ -1054,3 +1055,48 @@ mark {
   .reveal { opacity: 1; transform: none; }
   .ticker__track { animation: none; }
 }
+
+
+/* =====================================================================
+   Services: 留资 CTA · 付款回执 · 联系弹窗 · 独立页 (services.html)
+   ===================================================================== */
+.svc__cta { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; margin: 1.6rem 0 .4rem; }
+.svc__link { font-family: var(--mono); font-size: .82rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+/* 付款回执 */
+.pay__receipt { margin-top: 1rem; padding-top: .9rem; border-top: 2px dashed rgba(20,17,11,.25); display: flex; flex-direction: column; gap: .5rem; align-items: center; }
+.pay__receipt b { font-size: .82rem; }
+.pay__receipt-btn {
+  font-family: var(--sans); font-weight: 700; font-size: .84rem; padding: .5rem 1rem;
+  background: var(--lime); color: var(--ink); border: var(--bd-2); border-radius: 9px; box-shadow: var(--sh-sm);
+  cursor: pointer; transition: transform .14s var(--ease), box-shadow .14s var(--ease);
+}
+.pay__receipt-btn:hover { transform: translate(-2px,-2px); box-shadow: var(--sh); }
+
+/* 联系 / 留资弹窗 */
+.ct__lead { font-size: .85rem; color: var(--muted); line-height: 1.55; margin: .4rem 0 1rem; }
+.ct__qr { width: 220px; height: auto; aspect-ratio: 512 / 680; }
+.ct__list { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin-top: 1rem; text-align: left; }
+.ct__list li { display: flex; align-items: center; gap: .6rem; padding: .5rem .7rem; background: var(--paper-2); border: var(--bd-2); border-radius: 9px; }
+.ct__list li span { font-family: var(--mono); font-size: .7rem; color: var(--muted); flex-shrink: 0; }
+.ct__list li b { font-family: var(--mono); font-size: .82rem; flex: 1; overflow-wrap: anywhere; }
+.ct__copy {
+  flex-shrink: 0; font-family: var(--sans); font-weight: 700; font-size: .72rem; padding: .28rem .6rem;
+  background: var(--ink); color: var(--paper); border: none; border-radius: 6px; cursor: pointer;
+}
+.ct__copy.is-copied { background: var(--lime); color: var(--ink); }
+
+/* 独立服务页 */
+.svcpage { background: var(--paper); }
+.svcpage__main { max-width: 1120px; margin: 0 auto; padding: clamp(6.5rem, 12vw, 8rem) clamp(1rem, 4vw, 2rem) 4rem; }
+.svcpage__head { margin-bottom: 2.4rem; }
+.svcpage__title { font-size: clamp(2rem, 7vw, 3.6rem); line-height: 1.02; margin: .9rem 0 .7rem; }
+.svcpage__title span { color: var(--muted); font-size: .45em; }
+.svcpage__sub { color: var(--muted); font-size: 1rem; max-width: 64ch; line-height: 1.65; }
+.svcpage__trust { margin-top: 3rem; padding: 1.6rem; background: var(--paper-2); border: var(--bd); border-radius: 16px; box-shadow: var(--sh); }
+.svcpage__trust-title { font-size: 1.15rem; margin-bottom: 1rem; }
+.svcpage__trust-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: .8rem; }
+.svcpage__trust-list li { display: flex; flex-direction: column; gap: .2rem; padding: .7rem .85rem; background: var(--paper); border: var(--bd-2); border-radius: 10px; border-left: 7px solid var(--red); }
+.svcpage__trust-list li b { font-size: .9rem; }
+.svcpage__trust-list li span { font-size: .78rem; color: var(--muted); line-height: 1.45; }
+.svcpage .nav__cta { cursor: pointer; font-family: var(--sans); }
