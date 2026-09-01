@@ -15,7 +15,7 @@ Zeabur 会自动识别根目录的 `Dockerfile` 并构建，无需任何额外�
 1. 登录 [Zeabur](https://zeabur.com) → 新建 **Project** → **Add Service** → **Deploy from GitHub**
 2. 选择本仓库与分支
 3. Zeabur 检测到 `Dockerfile`，自动构建 nginx 镜像并部署
-4. 在服务的 **Networking / Domains** 绑定域名（如现有的 `cjy-self-production.zeabur.app`）
+4. 在服务的 **Networking / Domains** 绑定域名（如现有的 `cjy-webpage.zeabur.app`）
 
 > **端口**：容器监听 `$PORT`（Zeabur 注入；本地默认 `8080`），Zeabur 自动探测，无需手动设置。
 

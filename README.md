@@ -75,7 +75,7 @@ docker build -t cjy-site . && docker run --rm -p 8080:8080 cjy-site
 导入仓库后 Zeabur 会**自动识别 `Dockerfile`** 并构建部署。
 
 完整步骤（含「纯静态」备选方案）见 **[DEPLOY.md](DEPLOY.md)**。
-当前线上：<https://cjy-self-production.zeabur.app>
+当前线上：<https://cjy-webpage.zeabur.app>
 
 ## 🎨 改配色 / 内容
 
