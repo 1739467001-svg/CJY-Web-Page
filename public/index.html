@@ -8,22 +8,22 @@
   <meta name="author" content="陈俊烨 CJY" />
   <meta name="theme-color" content="#F7F2E4" />
 
-  <link rel="canonical" href="https://cjy-self-production.zeabur.app/" />
+  <link rel="canonical" href="https://cjy-webpage.zeabur.app/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="CJY · 陈俊烨" />
   <meta property="og:locale" content="zh_CN" />
   <meta property="og:title" content="CJY 陈俊烨 · VIBE CODER" />
   <meta property="og:description" content="AI 教育系统数字化 · 未来课堂探索 · AI 多模态 🦞" />
-  <meta property="og:url" content="https://cjy-self-production.zeabur.app/" />
-  <meta property="og:image" content="https://cjy-self-production.zeabur.app/og.png" />
+  <meta property="og:url" content="https://cjy-webpage.zeabur.app/" />
+  <meta property="og:image" content="https://cjy-webpage.zeabur.app/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="CJY 陈俊烨 · Vibe Coder · AI 教育 × 多模态 × 未来课堂 🦞" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="CJY 陈俊烨 · VIBE CODER" />
   <meta name="twitter:description" content="AI 教育系统数字化 · 未来课堂探索 · AI 多模态 🦞" />
-  <meta name="twitter:image" content="https://cjy-self-production.zeabur.app/og.png" />
+  <meta name="twitter:image" content="https://cjy-webpage.zeabur.app/og.png" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦞</text></svg>" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -35,8 +35,8 @@
     "@type": "Person",
     "name": "陈俊烨",
     "alternateName": "CJY",
-    "url": "https://cjy-self-production.zeabur.app/",
-    "image": "https://cjy-self-production.zeabur.app/og.png",
+    "url": "https://cjy-webpage.zeabur.app/",
+    "image": "https://cjy-webpage.zeabur.app/og.png",
     "jobTitle": "Vibe Coder",
     "email": "2975982783@qq.com",
     "description": "专注 AI 教育系统数字化、未来课堂探索与 AI 多模态的 Vibe Coder。",
@@ -117,7 +117,7 @@
       <a href="#volunteer">志愿</a>
       <a href="#contact">联系</a>
     </nav>
-    <a class="nav__cta" href="https://cjy-self-production.zeabur.app" target="_blank" rel="noopener">专业主页 ↗</a>
+    <a class="nav__cta" href="https://cjy-webpage.zeabur.app" target="_blank" rel="noopener">专业主页 ↗</a>
     <button class="nav__burger" id="navBurger" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
 
@@ -151,6 +151,7 @@
       </ul>
 
       <div class="hero__actions reveal" data-reveal>
+        <button class="btn btn--lime" type="button" data-open-services>🦞 我能提供的服务 <span class="btn__tag">SERVICES</span></button>
         <a class="btn btn--red" href="#projects">看看我的作品 →</a>
         <a class="btn btn--blue" href="#journey">黑客松之旅 🚀</a>
       </div>
@@ -387,14 +388,30 @@
         <div class="panel ccard card--blue reveal" data-reveal>
           <span class="card__emoji">🌐</span>
           <h3>专业主页 / Site</h3>
-          <p class="ccard__val">cjy-self-production<wbr>.zeabur.app</p>
+          <p class="ccard__val">cjy-webpage<wbr>.zeabur.app</p>
           <div class="ccard__acts">
-            <a class="ccard__btn" href="https://cjy-self-production.zeabur.app" target="_blank" rel="noopener">访问 ↗</a>
+            <a class="ccard__btn" href="https://cjy-webpage.zeabur.app" target="_blank" rel="noopener">访问 ↗</a>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- ============ SERVICES OVERLAY ============ -->
+  <div class="svc" id="services" role="dialog" aria-modal="true" aria-labelledby="svcTitle" hidden>
+    <div class="svc__backdrop" data-close-services></div>
+    <div class="svc__panel" role="document">
+      <button class="svc__x" type="button" aria-label="关闭" data-close-services>✕</button>
+      <div class="svc__head">
+        <span class="svc__eyebrow">🦞 把我商品化 · 明码标价</span>
+        <h2 class="svc__title" id="svcTitle">我能提供的服务 <span>/ SERVICES</span></h2>
+        <p class="svc__sub">按「价值」定价，不按工时。每一档都写清价格与内容——选好直接扫码，我尽快联系你。</p>
+      </div>
+      <div class="svc__grid" id="servicesGrid"></div>
+      <div class="svc__cta"><button class="btn btn--lime" type="button" data-open-contact>💬 先聊聊，不用马上付款</button><a class="svc__link" href="services.html">服务清单独立页 ↗</a></div><p class="svc__foot">拿不准选哪档？加微信 <b>com_cjy_util</b> · 手机 <b>18143451183 陈先生</b> · 邮箱 <b>2975982783@qq.com</b></p>
+    </div>
+
+  </div>
 
   <!-- ===== lobster parade ===== -->
   <div class="ticker ticker--band ticker--reverse" aria-hidden="true">
@@ -409,7 +426,7 @@
     <span class="footer__lob" aria-hidden="true">🦞</span>
     <div class="footer__cta-wrap">
       <p class="footer__kicker">想聊聊 AI、教育或黑客松？</p>
-      <a class="footer__big" href="https://cjy-self-production.zeabur.app" target="_blank" rel="noopener">访问我的专业主页 <span>↗</span></a>
+      <a class="footer__big" href="https://cjy-webpage.zeabur.app" target="_blank" rel="noopener">访问我的专业主页 <span>↗</span></a>
     </div>
     <div class="footer__bar">
       <span class="footer__brand"><span class="footer__logo">🦞</span> CJY · 陈俊烨 — Vibe Coder</span>
@@ -418,6 +435,7 @@
     </div>
   </footer>
 
+  <script src="services-data.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 </html>

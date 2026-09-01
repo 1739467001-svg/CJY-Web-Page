@@ -155,6 +155,52 @@
   }
 
   /* ===================================================================
+     Services — "把自己商品化" · a priced menu + WeChat/Alipay payment
+     Prices are value-anchored drafts; edit freely below.
+     Drop your own QR codes at: public/pay/wechat.png · public/pay/alipay.png
+     =================================================================== */
+  /* ---------- 服务清单：弹窗开关 + #services 深链 ----------
+     卡片数据与支付/联系弹窗都在 services-data.js（与 services.html 共用）。 */
+  const svc = $("#services");
+  if (svc && window.CJYServices) {
+    window.CJYServices.mount($("#servicesGrid"));
+
+    let lastFocus = null;
+    const openSvc = (push = true) => {
+      lastFocus = document.activeElement;
+      clearTimeout(svc._hideT);
+      svc.hidden = false;
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => svc.classList.add("is-open"));
+      svc.querySelector(".svc__x")?.focus();
+      // 让 URL 可分享：#services
+      if (push && location.hash !== "#services") history.pushState(null, "", "#services");
+    };
+    const closeSvc = () => {
+      svc.classList.remove("is-open");
+      clearTimeout(svc._hideT);
+      svc._hideT = setTimeout(() => { svc.hidden = true; }, reduceMotion ? 0 : 320);
+      document.body.style.overflow = "";
+      lastFocus?.focus?.();
+      if (location.hash === "#services") history.pushState(null, "", location.pathname);
+    };
+
+    $$("[data-open-services]").forEach((b) => b.addEventListener("click", () => openSvc()));
+    $$("[data-close-services]").forEach((b) => b.addEventListener("click", closeSvc));
+    document.addEventListener("keydown", (e) => {
+      // 支付/联系弹窗自己会先吃掉 Esc；都关了才轮到服务清单
+      if (e.key === "Escape" && !svc.hidden
+          && document.getElementById("pay")?.hidden !== false
+          && document.getElementById("contact-dlg")?.hidden !== false) closeSvc();
+    });
+
+    // 直接以 #services 打开，或前进/后退
+    const syncHash = () => { if (location.hash === "#services") openSvc(false); else if (!svc.hidden) closeSvc(); };
+    if (location.hash === "#services") openSvc(false);
+    window.addEventListener("popstate", syncHash);
+  }
+
+  /* ===================================================================
      Hackathon timeline data → items
      =================================================================== */
   const T = (label, type = "") => ({ label, type });
