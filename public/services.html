@@ -92,7 +92,9 @@
       </div>
     </header>
 
+    <div id="studioBanner"></div>
     <div class="svc__grid" id="servicesGrid"></div>
+    <div id="tipSection"></div>
 
     <section class="svcpage__trust">
       <h2 class="svcpage__trust-title">已经落地过的地方</h2>
@@ -122,7 +124,10 @@
   <script src="services-data.js" defer></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      if (window.CJYServices) window.CJYServices.mount(document.getElementById("servicesGrid"));
+      if (window.CJYServices) window.CJYServices.mount(document.getElementById("servicesGrid"), {
+        studioBannerEl: document.getElementById("studioBanner"),
+        tipEl: document.getElementById("tipSection"),
+      });
     });
   </script>
 </body>

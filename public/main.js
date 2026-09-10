@@ -163,7 +163,10 @@
      卡片数据与支付/联系弹窗都在 services-data.js（与 services.html 共用）。 */
   const svc = $("#services");
   if (svc && window.CJYServices) {
-    window.CJYServices.mount($("#servicesGrid"));
+    window.CJYServices.mount($("#servicesGrid"), {
+      studioBannerEl: $("#studioBanner"),
+      tipEl: $("#tipSection"),
+    });
 
     let lastFocus = null;
     const openSvc = (push = true) => {

@@ -1100,3 +1100,56 @@ mark {
 .svcpage__trust-list li b { font-size: .9rem; }
 .svcpage__trust-list li span { font-size: .78rem; color: var(--muted); line-height: 1.45; }
 .svcpage .nav__cta { cursor: pointer; font-family: var(--sans); }
+
+
+/* =====================================================================
+   OctoNova Labs 跳转横幅 + 自定义打赏卡
+   ===================================================================== */
+.studioband {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  padding: 1rem 1.2rem; margin-bottom: 1.8rem;
+  background: linear-gradient(135deg, #0B1E3D, #14335E);
+  color: #EAF2FF; border: var(--bd-2); border-radius: 14px; box-shadow: var(--sh-sm);
+  text-decoration: none; transition: transform .16s var(--ease), box-shadow .16s var(--ease);
+}
+.studioband:hover { transform: translate(-3px,-3px); box-shadow: var(--sh); }
+.studioband__mark { font-size: 1.8rem; flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(64,200,255,.55)); }
+.studioband__body { display: flex; flex-direction: column; gap: .2rem; flex: 1; min-width: 200px; }
+.studioband__body b { font-size: .96rem; }
+.studioband__body span { font-size: .78rem; color: #9FC3EE; }
+.studioband__body em { color: #6FE3FF; font-style: normal; font-weight: 700; }
+.studioband__go { flex-shrink: 0; font-family: var(--mono); font-size: .78rem; font-weight: 700; padding: .5rem .9rem; background: #6FE3FF; color: #0B1E3D; border-radius: 9px; }
+
+.tipcard {
+  margin-top: 2rem; padding: 1.4rem; background: var(--paper-2); border: var(--bd-2); border-radius: 16px; box-shadow: var(--sh-sm);
+}
+.tipcard__head { display: flex; align-items: flex-start; gap: .8rem; margin-bottom: 1.1rem; }
+.tipcard__emoji { font-size: 1.8rem; }
+.tipcard__title { font-size: 1.08rem; margin-bottom: .2rem; }
+.tipcard__sub { font-size: .84rem; color: var(--muted); }
+.tipcard__chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: .9rem; }
+.tipchip {
+  font-family: var(--mono); font-weight: 700; font-size: .88rem; padding: .5rem 1.1rem;
+  background: var(--paper); color: var(--ink); border: var(--bd-2); border-radius: 10px; cursor: pointer;
+  transition: transform .14s var(--ease), box-shadow .14s var(--ease), background .14s;
+}
+.tipchip:hover { transform: translate(-2px,-2px); box-shadow: var(--sh-sm); background: var(--lime); }
+.tipcard__custom { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.tipcard__cny { font-weight: 700; font-size: 1.05rem; }
+.tipcard__input {
+  flex: 1; min-width: 120px; font-family: var(--mono); font-size: .95rem; padding: .55rem .7rem;
+  background: var(--paper); border: var(--bd-2); border-radius: 9px; color: var(--ink);
+}
+.tipcard__input.is-error { border-color: var(--red); animation: tipshake .3s; }
+@keyframes tipshake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.tipcard__go {
+  font-family: var(--sans); font-weight: 700; font-size: .9rem; padding: .6rem 1.1rem;
+  background: var(--red); color: var(--paper); border: var(--bd-2); border-radius: 9px; box-shadow: var(--sh-sm);
+  cursor: pointer; transition: transform .14s var(--ease), box-shadow .14s var(--ease);
+}
+.tipcard__go:hover { transform: translate(-2px,-2px); box-shadow: var(--sh); }
+
+@media (max-width: 560px) {
+  .studioband { flex-direction: column; align-items: flex-start; }
+  .studioband__go { align-self: stretch; text-align: center; }
+}
