@@ -12,8 +12,10 @@
 (function () {
   "use strict";
 
-  /* OctoNova Labs 上线前先留占位；定下域名后把这一行改掉即可全站生效 */
-  var STUDIO_URL = "https://octonova.studio"; // TODO: 换成 OctoNova Labs 实际域名
+  /* OctoNova Labs 域名。留空 = 站点尚未上线，横幅自动降级为「即将上线」
+     并改为打开联系弹窗，避免把访客送到一个不存在的域名。
+     站点上线后把域名填进来即可，其余代码无需改动。 */
+  var STUDIO_URL = ""; // 例："https://octonova.studio"
 
   var svcGroups = [
     { id: "agent", label: "智能体 · 轻量款", icon: "🦞" },
@@ -138,15 +140,18 @@
 
   /* ---------- OctoNova Labs 跳转横幅（大项目导流） ---------- */
   function studioBannerHTML() {
-    return '' +
-      '<a class="studioband" href="' + STUDIO_URL + '" target="_blank" rel="noopener">' +
-        '<span class="studioband__mark">🐙</span>' +
-        '<span class="studioband__body">' +
-          '<b>更大规模的项目：定制智能体、企业培训、系统与数字孪生开发</b>' +
-          '<span>已经搬到工作室品牌 <em>OctoNova Labs</em> —— 深海主题，专注规模化交付</span>' +
-        '</span>' +
-        '<span class="studioband__go">前往 OctoNova Labs ↗</span>' +
-      '</a>';
+    var live = !!STUDIO_URL;
+    var inner =
+      '<span class="studioband__mark">🐙</span>' +
+      '<span class="studioband__body">' +
+        '<b>更大规模的项目：定制智能体、企业培训、系统与数字孪生开发</b>' +
+        '<span>由工作室品牌 <em>OctoNova Labs</em> 承接 —— 深海主题，专注规模化交付</span>' +
+      '</span>' +
+      '<span class="studioband__go">' + (live ? '前往 OctoNova Labs ↗' : '即将上线 · 先聊聊') + '</span>';
+    // 域名未定时不要生成死链，退化成一个打开联系弹窗的按钮
+    return live
+      ? '<a class="studioband" href="' + STUDIO_URL + '" target="_blank" rel="noopener">' + inner + '</a>'
+      : '<button class="studioband studioband--soon" type="button" data-open-contact>' + inner + '</button>';
   }
   function renderStudioBanner(el) { if (el) el.innerHTML = studioBannerHTML(); }
 
@@ -168,7 +173,7 @@
         '</div>' +
         '<div class="tipcard__custom">' +
           '<span class="tipcard__cny">¥</span>' +
-          '<input class="tipcard__input" id="tipInput" type="number" inputmode="decimal" min="1" step="0.1" placeholder="自定义金额">' +
+          '<input class="tipcard__input" id="tipInput" type="number" inputmode="decimal" min="1" max="50000" step="0.01" placeholder="自定义金额">' +
           '<button class="tipcard__go" type="button" data-tip-custom>打赏 →</button>' +
         '</div>' +
       '</div>';
@@ -250,9 +255,13 @@
     setMethod("wechat");
     show(payEl);
   }
+  var TIP_MIN = 1, TIP_MAX = 50000;
   function openTip(amount) {
-    amount = Math.round(amount * 10) / 10;
-    if (!amount || amount <= 0) return;
+    // 金额规整：两位小数（人民币最小单位是分），并夹在合理区间内，
+    // 避免 0 / 负数 / 科学计数法 / 超大金额传进支付备注
+    amount = Math.round(Number(amount) * 100) / 100;
+    if (!isFinite(amount) || amount < TIP_MIN) return;
+    if (amount > TIP_MAX) amount = TIP_MAX;
     current = { name: "打赏 · 请我喝杯奶茶", price: amount };
     payTitle.textContent = "打赏 · 请我喝杯奶茶 🦞";
     payAmount.textContent = amount;
@@ -288,7 +297,10 @@
       if (t.hasAttribute("data-tip-custom")) {
         var input = document.getElementById("tipInput");
         var v = input ? parseFloat(input.value) : NaN;
-        if (!v || v <= 0) { if (input) { input.focus(); input.classList.add("is-error"); setTimeout(function(){input.classList.remove("is-error");}, 900); } return; }
+        if (!isFinite(v) || v < TIP_MIN) {
+          if (input) { input.focus(); input.classList.add("is-error"); setTimeout(function(){input.classList.remove("is-error");}, 900); }
+          return;
+        }
         return openTip(v);
       }
       if (t.hasAttribute("data-close-pay")) return hideLater(payEl, 260);
@@ -307,7 +319,7 @@
       var input = document.activeElement;
       if (e.key === "Enter" && input && input.id === "tipInput") {
         var v3 = parseFloat(input.value);
-        if (v3 > 0) openTip(v3);
+        if (isFinite(v3) && v3 >= TIP_MIN) openTip(v3);
         return;
       }
       if (e.key !== "Escape") return;

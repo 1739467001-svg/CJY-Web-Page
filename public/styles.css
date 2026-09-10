@@ -942,7 +942,8 @@ mark {
 .svc__backdrop { position: absolute; inset: 0; background: rgba(20,17,11,.6); backdrop-filter: blur(3px); opacity: 0; transition: opacity .28s var(--ease); }
 .svc.is-open .svc__backdrop { opacity: 1; }
 .svc__panel {
-  position: relative; z-index: 1; width: min(1060px, 100%); max-height: 92vh; overflow-y: auto;
+  position: relative; z-index: 1; width: min(1060px, 100%);
+  max-height: 92vh; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain;
   background: var(--paper); border: var(--bd); border-radius: 20px; box-shadow: var(--sh-lg);
   padding: clamp(1.3rem, 3.5vw, 2.6rem); opacity: 0; transform: translateY(24px) scale(.98);
   transition: opacity .3s var(--ease), transform .3s var(--ease);
@@ -1005,7 +1006,8 @@ mark {
 .scard__buy--quote { background: transparent; color: var(--ink); }
 
 /* payment dialog */
-.pay { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; padding: 1rem; }
+.pay { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
+       padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom)); }
 .pay[hidden] { display: none; }
 .pay__backdrop { position: absolute; inset: 0; background: rgba(20,17,11,.5); backdrop-filter: blur(2px); opacity: 0; transition: opacity .22s var(--ease); }
 .pay.is-open .pay__backdrop { opacity: 1; }
@@ -1014,7 +1016,14 @@ mark {
   background: var(--paper); border: var(--bd); border-radius: 18px; box-shadow: var(--sh-lg);
   padding: 1.8rem 1.5rem 1.5rem; opacity: 0; transform: translateY(16px) scale(.97);
   transition: opacity .24s var(--ease), transform .24s var(--ease);
+  /* 短屏（小手机）内容会高过视口：限高 + 内部滚动，
+     否则关闭按钮与「发回执」按钮会被裁到视口外且滚不到 */
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto; overscroll-behavior: contain;
 }
+/* 关闭按钮跟随滚动，始终可点 */
+.pay__card .pay__x { position: sticky; float: right; top: 0; margin-right: -.4rem; }
 .pay.is-open .pay__card { opacity: 1; transform: none; }
 .pay__kicker { font-family: var(--mono); font-size: .74rem; font-weight: 700; color: var(--muted); }
 .pay__title { font-size: 1.15rem; line-height: 1.3; margin: .5rem 0 .3rem; }
@@ -1113,6 +1122,8 @@ mark {
   text-decoration: none; transition: transform .16s var(--ease), box-shadow .16s var(--ease);
 }
 .studioband:hover { transform: translate(-3px,-3px); box-shadow: var(--sh); }
+.studioband--soon { width: 100%; text-align: left; font: inherit; cursor: pointer; }
+.studioband--soon .studioband__go { background: #9FC3EE; }
 .studioband__mark { font-size: 1.8rem; flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(64,200,255,.55)); }
 .studioband__body { display: flex; flex-direction: column; gap: .2rem; flex: 1; min-width: 200px; }
 .studioband__body b { font-size: .96rem; }
@@ -1137,7 +1148,7 @@ mark {
 .tipcard__custom { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .tipcard__cny { font-weight: 700; font-size: 1.05rem; }
 .tipcard__input {
-  flex: 1; min-width: 120px; font-family: var(--mono); font-size: .95rem; padding: .55rem .7rem;
+  flex: 1; min-width: 120px; font-family: var(--mono); font-size: 16px; padding: .55rem .7rem;
   background: var(--paper); border: var(--bd-2); border-radius: 9px; color: var(--ink);
 }
 .tipcard__input.is-error { border-color: var(--red); animation: tipshake .3s; }
@@ -1152,4 +1163,43 @@ mark {
 @media (max-width: 560px) {
   .studioband { flex-direction: column; align-items: flex-start; }
   .studioband__go { align-self: stretch; text-align: center; }
+}
+
+
+/* =====================================================================
+   多端修复（2026-09）
+   ===================================================================== */
+
+/* 横向溢出：.ticker--band 的 rotate+scale 会把斜条撑出视口。
+   用 overflow-x: clip 裁掉页面级横向滚动——clip 不产生滚动容器，
+   position: fixed / sticky 的元素不受影响（hidden 会破坏它们）。 */
+html, body { overflow-x: clip; }
+
+/* 服务独立页移动端导航：全站 900px 以下会隐藏 .nav__links/.nav__cta 并
+   改用汉堡菜单，但 services.html 没有汉堡按钮，会只剩一个 logo。
+   这里为该页保留「回主页」与「先聊聊」两个关键入口。 */
+@media (max-width: 900px) {
+  .svcpage .nav__links { display: flex; margin-left: auto; }
+  .svcpage .nav__links a { display: none; }
+  .svcpage .nav__links a.nav__back { display: inline-flex; }
+  .svcpage .nav__cta { display: inline-flex; }
+}
+@media (max-width: 420px) {
+  .svcpage .nav__name em { display: none; }
+  .svcpage .nav__cta { padding: .5rem .7rem; font-size: .8rem; }
+  .svcpage .nav__links a.nav__back { padding: .4rem .55rem; font-size: .78rem; }
+}
+
+/* 矮屏（≤720px 高）压缩支付弹窗，尽量一屏放下不用滚 */
+@media (max-height: 720px) {
+  .pay__card { padding: 1.2rem 1.2rem 1.1rem; }
+  .pay__amount { margin: .2rem 0 .7rem; }
+  .pay__amount #payAmount { font-size: 2.1rem; }
+  .pay__cny { font-size: 1.1rem; }
+  .pay__tabs { margin-bottom: .7rem; }
+  .pay__qr { width: 185px; margin-bottom: .7rem; }
+  .ct__qr { width: 170px; }
+  .pay__receipt { margin-top: .7rem; padding-top: .6rem; }
+  .ct__lead { margin: .3rem 0 .7rem; }
+  .ct__list { margin-top: .7rem; gap: .4rem; }
 }
