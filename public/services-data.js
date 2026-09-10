@@ -140,18 +140,17 @@
 
   /* ---------- OctoNova Labs 跳转横幅（大项目导流） ---------- */
   function studioBannerHTML() {
-    var live = !!STUDIO_URL;
-    var inner =
-      '<span class="studioband__mark">🐙</span>' +
-      '<span class="studioband__body">' +
-        '<b>更大规模的项目：定制智能体、企业培训、系统与数字孪生开发</b>' +
-        '<span>由工作室品牌 <em>OctoNova Labs</em> 承接 —— 深海主题，专注规模化交付</span>' +
-      '</span>' +
-      '<span class="studioband__go">' + (live ? '前往 OctoNova Labs ↗' : '即将上线 · 先聊聊') + '</span>';
-    // 域名未定时不要生成死链，退化成一个打开联系弹窗的按钮
-    return live
-      ? '<a class="studioband" href="' + STUDIO_URL + '" target="_blank" rel="noopener">' + inner + '</a>'
-      : '<button class="studioband studioband--soon" type="button" data-open-contact>' + inner + '</button>';
+    // 站点尚未成型 —— 这里只做一块「预告装饰」：不可点、不跳转、不弹窗。
+    // 等 OctoNova Labs 上线后再改回可点击的导流入口。
+    return '' +
+      '<div class="studioband studioband--deco" aria-hidden="true">' +
+        '<span class="studioband__mark">🐙</span>' +
+        '<span class="studioband__body">' +
+          '<b>OctoNova Labs</b>' +
+          '<span>八条腕各自决策，长期吸积后爆发增亮 —— 承接规模化交付的工作室，筹备中</span>' +
+        '</span>' +
+        '<span class="studioband__go">COMING SOON</span>' +
+      '</div>';
   }
   function renderStudioBanner(el) { if (el) el.innerHTML = studioBannerHTML(); }
 

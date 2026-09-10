@@ -1122,8 +1122,10 @@ mark {
   text-decoration: none; transition: transform .16s var(--ease), box-shadow .16s var(--ease);
 }
 .studioband:hover { transform: translate(-3px,-3px); box-shadow: var(--sh); }
-.studioband--soon { width: 100%; text-align: left; font: inherit; cursor: pointer; }
-.studioband--soon .studioband__go { background: #9FC3EE; }
+.studioband--deco { cursor: default; pointer-events: none; }
+.studioband--deco:hover { transform: none; box-shadow: var(--sh-sm); }
+.studioband--deco .studioband__body b { font-family: var(--mono); letter-spacing: .08em; font-size: 1.02rem; color: #6FE3FF; }
+.studioband--deco .studioband__go { background: transparent; color: #6FE3FF; border: 2px dashed rgba(111,227,255,.5); letter-spacing: .12em; }
 .studioband__mark { font-size: 1.8rem; flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(64,200,255,.55)); }
 .studioband__body { display: flex; flex-direction: column; gap: .2rem; flex: 1; min-width: 200px; }
 .studioband__body b { font-size: .96rem; }
