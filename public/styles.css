@@ -433,10 +433,11 @@ mark {
 /* =====================================================================
    About
    ===================================================================== */
-.about__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.6rem; align-items: start; }
-.about__intro { padding: 1.8rem; }
-.about__intro p { font-size: clamp(1rem, 1.6vw, 1.15rem); margin-bottom: 1rem; }
-.about__cards { display: grid; gap: 1.2rem; }
+.about__grid { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
+.about__lead { font-size: clamp(1.2rem, 2.2vw, 1.55rem); font-weight: 700; line-height: 1.5; }
+.about__intro { padding: clamp(1.5rem, 3vw, 2.2rem); }
+.about__intro p { font-size: clamp(1rem, 1.6vw, 1.1rem); margin-bottom: .9rem; max-width: 64ch; }
+.about__cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1.2rem; align-items: stretch; }
 
 .card--lime { background: var(--lime); }
 .card--blue { background: var(--blue); color: var(--paper); }

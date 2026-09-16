@@ -92,7 +92,7 @@
       url: "https://time-machine-6iso.vercel.app", tint: "#FF5DA2", shot: "shots/time-machine.png" },
     { emoji: "🧾", cat: "趣味工具", title: "CJY 小票机",
       desc: "在线小票生成器，把想说的话打成一张有实体感的小票。",
-      url: "http://121.43.80.231/cjy/", tint: "#FF9F1C", shot: "shots/receipt.png" },
+      url: "http://60.205.204.162/cjy/", tint: "#FF9F1C", shot: "shots/receipt.png" },
     { emoji: "🚢", cat: "数字孪生", title: "AI 新能源物流 · 智慧港口数字孪生",
       desc: "港口装卸与新能源物流的三维孪生可视化，实时映射运营态势。",
       url: "https://smart-port-omega.vercel.app/", tint: "#2B47F0", shot: "shots/cargo-claw.png" },
