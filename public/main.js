@@ -83,7 +83,7 @@
   const projects = [
     { emoji: "🏫", cat: "数字孪生", title: "商大元境 · 下沙校区数字孪生",
       desc: "浙江工商大学下沙校区的三维数字孪生视觉模拟，把整个校园搬进浏览器。",
-      url: "", tint: "#2B47F0", shot: "shots/yuanjing.png" },
+      url: "http://121.43.80.231/campus/", tint: "#2B47F0", shot: "shots/yuanjing.png" },
     { emoji: "🎨", cat: "作品展台", title: "首届 AI 黑客松作品展",
       desc: "信电学院 · 人工智能学院首届 AI 黑客松大赛学生作品展示。",
       url: "https://zjsu-ai-hackathon.vercel.app/", tint: "#FF4D1C", shot: "shots/hackathon.png" },
@@ -142,6 +142,8 @@
 
   // early / practice works — kept small, collapsed behind a <details> toggle
   const earlyWorks = [
+    { emoji: "🦞", title: "会议室预约虾 · AI Agent", url: "https://meetroomshrimp-gvfhrxz8.manus.space" },
+    { emoji: "🏢", title: "会议室预约虾 · 3D 数字孪生", url: "https://zjgsu.vercel.app/" },
     { emoji: "🎬", title: "皮克斯动画展览馆 + 百炼 AI 助手", url: "https://app-7wopwmdzk2dd.appmiaoda.com" },
     { emoji: "🎨", title: "创意协作空间", url: "https://app-7xtjhhrg15vl.appmiaoda.com" },
     { emoji: "📈", title: "爆款文案视频探测器", url: "https://app-8d3qvlz16igx.appmiaoda.com" },
