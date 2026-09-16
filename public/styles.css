@@ -1205,3 +1205,9 @@ html, body { overflow-x: clip; }
   .ct__lead { margin: .3rem 0 .7rem; }
   .ct__list { margin-top: .7rem; gap: .4rem; }
 }
+
+/* 尚未公开部署的作品：不可点击，视觉上弱化 */
+.pcard--offline { cursor: default; }
+.pcard--offline:hover { transform: none; box-shadow: var(--sh); }
+.pcard--offline:hover .pcard__body { background: var(--paper-2); }
+.pcard--offline .pcard__arrow { background: var(--muted); }

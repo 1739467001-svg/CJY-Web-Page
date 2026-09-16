@@ -81,15 +81,21 @@
   // shot: drop a screenshot path (e.g. "shots/cargo.jpg") to replace the placeholder.
   // featured: renders as a larger "代表作" card. tint: placeholder accent colour.
   const projects = [
-    { emoji: "🦞", cat: "AI Agent", title: "会议室预约虾",
-      desc: "会议室预约智能体：自然语言下单，自动排期与冲突检测。",
-      url: "https://meetroomshrimp-gvfhrxz8.manus.space", tint: "#FF5DA2", shot: "shots/meetshrimp.png" },
-    { emoji: "🏢", cat: "数字孪生", title: "会议室预约虾 · 3D 数字孪生",
-      desc: "会议室预约的三维现实镜像：6 间会议室实时占用、全天时段回放、3D 预约。",
-      url: "https://zjgsu.vercel.app/", tint: "#2B47F0", shot: "shots/zjgsu.png" },
-    { emoji: "🚢", cat: "数字孪生", title: "智慧港口数字孪生",
-      desc: "港口装卸与物流的三维孪生可视化，实时映射运营态势。",
-      url: "https://cargo-claw.vercel.app", tint: "#2B47F0", shot: "shots/cargo-claw.png" },
+    { emoji: "🏫", cat: "数字孪生", title: "商大元境 · 下沙校区数字孪生",
+      desc: "浙江工商大学下沙校区的三维数字孪生视觉模拟，把整个校园搬进浏览器。",
+      url: "", tint: "#2B47F0", shot: "shots/yuanjing.png" },
+    { emoji: "🎨", cat: "作品展台", title: "首届 AI 黑客松作品展",
+      desc: "信电学院 · 人工智能学院首届 AI 黑客松大赛学生作品展示。",
+      url: "https://zjsu-ai-hackathon.vercel.app/", tint: "#FF4D1C", shot: "shots/hackathon.png" },
+    { emoji: "⏳", cat: "互动体验", title: "人生时光机",
+      desc: "一次可交互的人生回溯体验，把时间轴变成可以走进去的场景。",
+      url: "https://time-machine-6iso.vercel.app", tint: "#FF5DA2", shot: "shots/time-machine.png" },
+    { emoji: "🧾", cat: "趣味工具", title: "CJY 小票机",
+      desc: "在线小票生成器，把想说的话打成一张有实体感的小票。",
+      url: "http://121.43.80.231/cjy/", tint: "#FF9F1C", shot: "shots/receipt.png" },
+    { emoji: "🚢", cat: "数字孪生", title: "AI 新能源物流 · 智慧港口数字孪生",
+      desc: "港口装卸与新能源物流的三维孪生可视化，实时映射运营态势。",
+      url: "https://smart-port-omega.vercel.app/", tint: "#2B47F0", shot: "shots/cargo-claw.png" },
     { emoji: "✈️", cat: "数字孪生", title: "成都天府国际机场孪生",
       desc: "天府国际机场的数字孪生模拟，空地协同的可视化沙盘。",
       url: "http://aerotwin-tfu.vercel.app/", tint: "#2B47F0", shot: "shots/aerotwin.png" },
@@ -102,17 +108,19 @@
     { emoji: "🪐", cat: "3D 可视化", title: "太阳系模拟与漫游",
       desc: "可交互的太阳系三维模拟，自由漫游每一颗行星。",
       url: "https://virtual-universe-eight.vercel.app/", tint: "#7A5CFF", shot: "shots/solar.png" },
-    { emoji: "🎨", cat: "作品展台", title: "首届 AI 黑客松作品展",
-      desc: "信电学院 · 人工智能学院首届 AI 黑客松大赛学生作品展示。",
-      url: "https://zjsu-ai-hackathon.vercel.app/", tint: "#FF4D1C", shot: "shots/hackathon.png" },
   ];
 
   const fmtHost = (u) => { try { return new URL(u).host; } catch { return u; } };
 
   const grid = $("#projectsGrid");
   if (grid) {
-    grid.innerHTML = projects.map((p) => `
-      <a class="pcard reveal${p.featured ? " pcard--feat" : ""}" data-reveal href="${p.url}" target="_blank" rel="noopener">
+    grid.innerHTML = projects.map((p) => {
+      // 没有 url 的作品（尚未公开部署）渲染成不可点击的卡片，避免死链
+      const live = !!p.url;
+      const tag  = live ? "a" : "div";
+      const attr = live ? ` href="${p.url}" target="_blank" rel="noopener"` : "";
+      return `
+      <${tag} class="pcard reveal${p.featured ? " pcard--feat" : ""}${live ? "" : " pcard--offline"}" data-reveal${attr}>
         <div class="pcard__thumb" style="--tint:${p.tint || "var(--blue)"}">
           <span class="pcard__ghost">${p.emoji}</span>
           ${p.shot
@@ -124,11 +132,12 @@
           <h3>${p.title}</h3>
           <p>${p.desc}</p>
           <div class="pcard__foot">
-            <span class="pcard__url">${fmtHost(p.url)}</span>
-            <span class="pcard__arrow">↗</span>
+            <span class="pcard__url">${live ? fmtHost(p.url) : "内部演示 · 暂未公开"}</span>
+            <span class="pcard__arrow">${live ? "↗" : "🔒"}</span>
           </div>
         </div>
-      </a>`).join("");
+      </${tag}>`;
+    }).join("");
   }
 
   // early / practice works — kept small, collapsed behind a <details> toggle
@@ -246,6 +255,20 @@
       tags: [T("工作人员")] },
     { date: "2026.06.12", title: "信电学院 · 人工智能学院首届 AI 黑客松大赛",
       tags: [T("宣传落地设计")] },
+    { date: "2026.06.23–24", title: "亚马逊云科技 2026 中国峰会",
+      tags: [T("志愿者")] },
+    { date: "2026.07.04", title: "上海首场 AI 生命领养市集",
+      tags: [T("⭐ 外场负责人", "lead")] },
+    { date: "2026.07.09–12", title: "深圳微光青少年黑客松",
+      tags: [T("技术助教"), T("🏆 带队获「微光共振奖」", "award")] },
+    { date: "2026.07.22–26", title: "AdventureX 2026 · 中国最大的黑客松",
+      tags: [T("指引者"), T("原子公社展商")], star: true },
+    { date: "2026.08.01–03", title: "北京 MoonStone 初中生黑客松",
+      tags: [T("⭐ 驻场嘉宾与评委", "lead"), T("首次坐上评委席")], star: true },
+    { date: "2026.08.16", title: "杭州 AGENT BUILDER HACKATHON",
+      tags: [T("技术指导"), T("🏆 带队 4 位初中生获三等奖", "award")] },
+    { date: "2026.08.19–25", title: "上海松江区 2026「星火计划」OPC 创业挑战赛",
+      tags: [T("⭐ 主办方 · 活动落地执行", "lead")] },
   ];
 
   const tagClass = (t) => t === "award" ? "tl-tag tl-tag--award"
